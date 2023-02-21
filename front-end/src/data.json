@@ -1,0 +1,44 @@
+{
+    "words": [
+        {
+            "english" : "i walk",
+            "spanish" : "camino"
+        },
+        {
+            "english" : "they eat",
+            "spanish" : "ellos comen"
+        },
+        {
+            "english" : "she speaks",
+            "spanish" : "ella habla"
+        },
+        {
+            "english" : "he sleeps",
+            "spanish" : "el derma"
+        },
+        {
+            "english" : "we read",
+            "spanish" : "nosotros leemos"
+        },
+        {
+            "english" : "you cook",
+            "spanish" : "usted cocina"
+        },
+        {
+            "english" : "i want",
+            "spanish" : "quiero"
+        },
+        {
+            "english" : "they dance",
+            "spanish" : "ellos bailan"
+        },
+        {
+            "english" : "to swim",
+            "spanish" : "nadar"
+        },
+        {
+            "english" : "to sing",
+            "spanish" : "cantar"
+        }
+    ]
+}
