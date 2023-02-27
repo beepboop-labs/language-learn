@@ -1,21 +1,14 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import MultipleChoice from './components/MultipleChoice.vue';
 import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <MultipleChoice/> 
+  
 
-    <div class="wrapper">
-      <HelloWorld msg="Hello World!" />
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, dolore doloremque iste aliquam, labore exercitationem nam error, natus possimus reprehenderit aspernatur. Nihil minus, in ratione nesciunt harum suscipit officiis hic.</p>
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  
 </template>
 
 <style scoped>
