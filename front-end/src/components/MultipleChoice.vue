@@ -1,4 +1,9 @@
 <script setup>
+import data from '../data.json';
+
+console.log(data)
+
+
 defineProps({
   msg: {
     type: String,
