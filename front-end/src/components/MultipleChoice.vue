@@ -8,6 +8,7 @@
   let spanishWord = data.words[currentIndex].spanish
   let answerOptions = []
   let quizLength = data.words.length
+  let selectedAnswer = ""
 
   let gradeMsg = ""
 
@@ -29,14 +30,14 @@
     answerOptions = answerOptions.sort((a, b) => 0.5 - Math.random());
   }
 
-  function checkAnswer(str){
-    return  str == data.words[currentIndex].spanish
+  function checkAnswer(){
+    return  selectedAnswer == data.words[currentIndex].spanish
   }
 
-  function submitAnswer(str){
+  function submitAnswer(){
     
     // The answer is correct
-    if(checkAnswer(str)){
+    if(checkAnswer()){
 
     // increment the score
     currentScore += 1
