@@ -31,17 +31,20 @@
   }
 
   function checkAnswer(){
+    console.log(selectedAnswer)
+    console.log(data.words[currentIndex].spanish)
     return  selectedAnswer == data.words[currentIndex].spanish
   }
 
   function submitAnswer(){
-    
+    console.log("Button was clicked")
+    console.log(checkAnswer())
     // The answer is correct
     if(checkAnswer()){
 
     // increment the score
     currentScore += 1
-
+    console.log(currentScore)
     // move to the next question
     currentIndex +=1
 
@@ -54,6 +57,7 @@
     } else {
       gradeMsg = "Incorrect, Try Again."
     }
+    this.$forceUpdate()
   }
 
   
@@ -71,12 +75,12 @@
         <span class = "keyword">"{{englishWord}}"</span>
     </div>
     <div class = "options">
-        <div>
-            <input type = "radio" id = "text" name = "answers" value = "text">
-            <label for ="text"> text </label>
+        <div v-for="option in answerOptions">
+            <input type = "radio" :id = "option" name = "answers" :value = "option" v-model="selectedAnswer">
+            <label :for ="option"> {{ option }} </label>
         </div>
     </div>
-    <button type ="button"> Submit </button>
+    <button @click="submitAnswer" type ="button"> Submit </button>
     <div class="grade-msg">{{ gradeMsg }}</div>
   </div>
 </template>
