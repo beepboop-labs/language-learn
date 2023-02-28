@@ -1,5 +1,6 @@
 <script setup>
   import data from '../data.json';
+
   // console.log(data)
   let currentScore = 0
   let currentIndex = 0;
@@ -14,10 +15,9 @@
     // add the correct answer to the answer options
     answerOptions.push(data.words[currentIndex].spanish)
     
-    // choose 3 random options that are not the correct answer
+    // add 3 random options that are not the correct answer
+    let choice = currentIndex
     for(let i=0; i < 3; i++){
-      let choice = currentIndex
-
       while(choice == currentIndex) {
         choice = Math.floor(Math.random() * data.words.length)
       }
