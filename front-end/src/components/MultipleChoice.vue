@@ -19,7 +19,7 @@
     // add 3 random options that are not the correct answer
     let choice = currentIndex
     for(let i=0; i < 3; i++){
-      while(choice == currentIndex) {
+      while(answerOptions.includes(data.words[choice].spanish)) {
         choice = Math.floor(Math.random() * data.words.length)
       }
 
@@ -58,7 +58,7 @@
 
   
   setAnswerOptions()
-
+  console.log(answerOptions)
 
 
 </script>
