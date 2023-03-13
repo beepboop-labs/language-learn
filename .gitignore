@@ -105,3 +105,6 @@ dist
 
 # Weird Mac Files
 .DS_Store
+
+#Python Libraries in virtualenvironment
+pyenv/
