@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask import request, redirect, session
 from flask import jsonify
+from flask_cors import CORS
 import json
 import sqlite3
 
@@ -10,6 +11,7 @@ quiz_data = json.load(f)
 
 
 app = Flask(__name__)
+CORS(app)
 
 #TODO: STORE DB KEYS IN .ENV FILE
 app.secret_key = 'my_secret_key'
@@ -73,8 +75,10 @@ def login():
             return jsonify({'message': 'Invalid username or password.'})
 
 
-@app.route('/quiz', methods=['POST'])
-def quiz():
+@app.route('/quizdata', methods=['POST'])
+
+#TODO: ADD ARGUMENTS FOR QUIZ LENGTH, TYPE, ETC
+def quizdata():
     if request.method == 'POST':
         return jsonify(quiz_data)
 

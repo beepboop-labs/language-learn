@@ -1,12 +1,15 @@
 <script setup>
-  import { ref } from 'vue'
-  import data from '../data.json'
+  import { ref, onMounted } from 'vue'
 
+  // const fetch = require('node-fetch');
+  const quizURL = "http://127.0.0.1:5000/quizdata"
+
+  let data
   let quizIndex = ref(0)
-  let englishWord  = ref(data.words[quizIndex.value].english)
-  let spanishWord = ref(data.words[quizIndex.value].spanish)
+  let englishWord  = ref("")
+  let spanishWord = ref("")
   let answerOptions = []
-  let quizLength = data.words.length
+  let quizLength = 0
   let selectedAnswer = ref("")
   let message = ref("")
 
@@ -79,10 +82,36 @@
   }
 
   function initializeQuiz() {
-    setAnswerOptions()
+    //POST request options
+    const options = {}
+
+    // Fetch the quiz data from the API
+    fetch(quizURL, {
+      method: 'POST',
+      body: JSON.stringify(options),
+      headers: { 'Content-Type': 'application/json' }
+    }).then(res => res.json())
+      .then(json => {
+        data = json;
+        
+        englishWord.value = data.words[quizIndex.value].english;
+        spanishWord.value = data.words[quizIndex.value].spanish;
+        quizLength = data.words.length;
+
+        setAnswerOptions()
+
+      })
+      .catch(err => console.log("Unable to load quiz data: " + err))
+
   }
+
+  // This is a built-in lifecycle hook from Vue
+  onMounted(() => {
+    console.log("Quiz mounted");
+    initializeQuiz()
+  });
  
-  initializeQuiz()
+  
 
 </script>
 
