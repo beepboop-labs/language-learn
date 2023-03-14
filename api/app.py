@@ -1,12 +1,20 @@
 from flask import Flask, render_template
 from flask import request, redirect, session
+from flask import jsonify
+from flask_cors import CORS
+import json
 import sqlite3
 
+# SAMPLE QUIZ DATA
+f = open('data.json')
+quiz_data = json.load(f)
+
+
 app = Flask(__name__)
+CORS(app)
+
+#TODO: STORE DB KEYS IN .ENV FILE
 app.secret_key = 'my_secret_key'
-
-# Your Flask app code goes here
-
 
 # Define the create_user function
 def create_user(username, password):
@@ -15,11 +23,8 @@ def create_user(username, password):
     conn = sqlite3.connect('users.db')
     cursor = conn.cursor()
 
-    cursor.execute('''DROP TABLE IF EXISTS users''')
-    
-    # Creare a users table
-    cursor.execute('''CREATE TABLE users
-             (username TEXT, password TEXT)''')
+    #TODO: NEED TO CHECK IF USER ALREADY EXISTS/USERNAME TAKEN
+    #TODO: ADD PASSWORD HASHING?
 
     # Insert a new user into the users table
     cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
@@ -36,12 +41,11 @@ def get_user(username):
     conn.close()
     return user
 
-@app.route('/')
-def home():
-    return render_template('home.html')
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+
+    ## TODO: ADD A TRY CATCH HERE
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -49,13 +53,14 @@ def signup():
         # Create a new user in the database
         create_user(username, password)
 
-        # Redirect to the login page
-        return redirect('/login')
-    # handle the sign-up process
-    return render_template('signup.html')
+        return jsonify({'username': username,
+                        'password': password}), 200
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
+    #TODO: SET UP JWT OR OTHER METHOD FOR CLIENT SIDE SESSION
+
     if request.method == 'POST':
         # Check if the user's entered username and password are valid
         username = request.form['username']
@@ -64,13 +69,18 @@ def login():
         if user is not None and user[1] == password:
             # Log the user in and redirect to the dashboard
             session['username'] = username
-            return 'Welcome to the quiz'
+            return jsonify({'message': 'Login Successful'})
         else:
             # Display an error message
-            return 'Invalid username or password.'
-    else:
-        # Render the login form
-        return render_template('login.html')
+            return jsonify({'message': 'Invalid username or password.'})
+
+
+@app.route('/quizdata', methods=['POST'])
+
+#TODO: ADD ARGUMENTS FOR QUIZ LENGTH, TYPE, ETC
+def quizdata():
+    if request.method == 'POST':
+        return jsonify(quiz_data)
 
 
 if __name__ == '__main__':
