@@ -116,7 +116,7 @@
 </script>
 
 <template>
-  <div class="content">
+  <div id="multiple-choice-quiz">
     <div class = "progress">{{ quizIndex + 1 }}/{{ quizLength }}</div>
     <div class = "question">
         <span class = "prompt">How do you say </span>

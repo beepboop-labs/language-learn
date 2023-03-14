@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <div class="content">
+  <div id="home">
     <h1>Homepage</h1>
     <router-link to = "/multiple-choice">Multiple Choice Quiz</router-link>
     <br>

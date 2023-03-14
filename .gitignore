@@ -108,3 +108,5 @@ dist
 
 #Python Libraries in virtualenvironment
 pyenv/
+
+__pycache__/
