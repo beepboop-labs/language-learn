@@ -25,6 +25,7 @@ def create_user(username, password):
 
     #TODO: NEED TO CHECK IF USER ALREADY EXISTS/USERNAME TAKEN
     #TODO: ADD PASSWORD HASHING?
+    #TODO: ADD TRY CATCH
 
     # Insert a new user into the users table
     cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
