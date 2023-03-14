@@ -4,7 +4,7 @@
 </script>
 
 <template>
-  <div class="content">
+  <div id="login">
     <h1>Login</h1>
     <router-link to = "/">Home</router-link>
   </div>
