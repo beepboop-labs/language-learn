@@ -17,6 +17,8 @@ def create_app( ):
     
     with app.app_context():
         from  app.routes import auth, quiz, user
+
+        # TODO: Figure out if migrations make this line unnecessary
         db.create_all()  # Create sql tables for our data models
 
     return app

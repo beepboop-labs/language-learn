@@ -1,19 +1,12 @@
 from flask import request, make_response
-import json
-from flask import jsonify
 from flask import current_app as app
-# from ..models.user import User, db
-
-# SAMPLE QUIZ DATA
-f = open('sample_data.json')
-quiz_data = json.load(f)
+from app.services.quiz_service import get_quiz
 
 @app.route('/quiz', methods=['POST'])
 def quiz():
-    """Login a user from request json body."""
-    #There is no request data right now.
-    #TODO: add logic to request different kinds of quiz data
-    request_data = request.get_json()
 
-    return jsonify(quiz_data)
+    #There is no request data right now.
+    request_data = request.get_json()
+    response = get_quiz(request_data)
+    return response
 
