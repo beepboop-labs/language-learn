@@ -2,7 +2,7 @@
   import { ref, onMounted } from 'vue'
 
   // const fetch = require('node-fetch');
-  const quizURL = "http://127.0.0.1:5000/quizdata"
+  const quizURL = "http://127.0.0.1:5000/quiz"
 
   let data
   let quizIndex = ref(0)
