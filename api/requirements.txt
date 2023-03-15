@@ -19,6 +19,7 @@ Mako==1.2.4
 MarkupSafe==2.1.2
 PyJWT==2.6.0
 pyrsistent==0.19.3
+python-dotenv==1.0.0
 pytz==2022.7.1
 six==1.16.0
 SQLAlchemy==2.0.6

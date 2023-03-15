@@ -1,11 +1,10 @@
 from flask import request, make_response
-
-#TODO: Fix this. There is no 'current_app'
+import json
 from flask import current_app as app
 # from ..models.user import User, db
 
 # SAMPLE QUIZ DATA
-f = open('../../sample_data.json')
+f = open('sample_data.json')
 quiz_data = json.load(f)
 
 @app.route('/quiz', methods=['POST'])

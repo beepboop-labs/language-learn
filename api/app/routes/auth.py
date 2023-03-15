@@ -14,12 +14,11 @@ def register_user():
 
     #TODO: Check if username already exists
 
-    if username and email:
+    if username and password:
         new_user = User(
             username=username,
             password=password
         )
-
 
         db.session.add(new_user)  # Adds new User record to database
         db.session.commit()  # Commits all changes
