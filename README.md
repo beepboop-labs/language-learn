@@ -3,15 +3,27 @@
 ## Frontend Vue.js Application
 
 ### Setting up the development environment
+First, make sure you have Node.js version 18 and NPM installed.
+
+Next, install the project dependencies. From the root project directory `/front-end` run:
+```
+npm install
+```
+
+This should create a `node_modules` directory that stores all the external libraries for the project. It's not checked into version control and is listed in `.gitignore`
+
+**NOTE**: When you install new packages with `npm install <SOME-PACKAGE>` they will automatically be added to the `package.json` and tracked so other devs can install the same dependencies for running the project.
 
 ### Running the application
 
-### Running Tests
-
-### Deploying to production
+To run a development server locally, from the root directory `front-end/` use:
+```
+npm run dev
+```
 
 ### Project Structure
 ```
+.
 ├── README.md
 ├── index.html
 ├── package-lock.json
@@ -37,6 +49,24 @@
         ├── MultipleChoiceQuiz.vue
         └── Register.vue
 ```
+
+#### app.vue
+This is the main vue.js application. All other components and views are generated inside of here. 
+
+#### assets/
+The application-wide .css files as well as other app assets like logos and icons live here
+
+#### views/
+Individual pages such as `Login.vue` live here. They need to be registered with vue-router in `router/index.js` in order to be able to work.
+
+#### components/
+Contains vue templates which aren't pages on their own, but that may be used inside views or inside other components. Things like Navbars, Footers, or forms that may be re-used in multuple places are examples of what goes here.
+
+#### router/
+Contains the file which sets up page routing for the app. If you create a new page ('view'), make sure to import and register the view here.
+
+#### package.json
+This is the file that tracks javascript project dependencies using npm (Node Package Manager).
 
 ## Backend Flask API
 
