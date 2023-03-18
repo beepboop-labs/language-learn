@@ -10,6 +10,7 @@
                 <h5 class="text-uppercase">Footer</h5>
             </div>
         </div>
+    </div>    
 </footer>
 
   
