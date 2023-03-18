@@ -9,7 +9,8 @@
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="images/istockphoto-1268465415-612x612.jpg" class="d-block w-100" alt="...">
+
+                        <img src="assests/Images/istockphoto-1268465415-612x612.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
                         <img src="images/istockphoto-1268465415-612x612.jpg" class="d-block w-100" alt="...">
@@ -30,14 +31,14 @@
 
         </div>
     </div>
-  <div id="home">
+  <!-- <div id="home">
     <h1>Homepage</h1>
     <router-link to = "/multiple-choice">Multiple Choice Quiz</router-link>
     <br>
     <router-link to = "/login">Login</router-link>
     <br>
     <router-link to = "/register">Register</router-link>
-  </div>
+  </div> -->
 </template>
 
 <style scoped>
