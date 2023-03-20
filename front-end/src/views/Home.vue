@@ -1,19 +1,32 @@
-<script setup>
-
-
-</script>
-
 <template>
-  <div id="home">
-    <h1>Homepage</h1>
-    <router-link to = "/multiple-choice">Multiple Choice Quiz</router-link>
-    <br>
-    <router-link to = "/login">Login</router-link>
-    <br>
-    <router-link to = "/register">Register</router-link>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <img src="../assets/Images/istockphoto-1268465415-612x612.jpg" class="image" alt="...">
+        </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
+.image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.image img {
+  display: block;
+  margin: auto;
+  max-width: 80%;
+  height: 50%;
+}
 </style>
