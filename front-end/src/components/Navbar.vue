@@ -1,22 +1,20 @@
-<script>
-export default {
-    data() {
-        return {
-            showMobileMenu: false,
-        };
-    },
-    methods: {
-        showMenu() {
-            this.showMobileMenu = !this.showMobileMenu;
-        },
-    },
-};
+<script setup>
+import { ref, onMounted } from 'vue';
+    
+    
+let showMobileMenu= ref(false);
+
+function showMenu() {
+    showMobileMenu = !showMobileMenu;
+}
+    
+
 </script>
 
 <template>
     <div id="navbar">
         <div class="nav-menu">
-            <div class="hamburger" @click="showMenu()" >
+            <div class="hamburger" @click="showMenu" >
                 <font-awesome-icon icon="fa-bars" />
             </div> 
             <div class="nav-content" :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'"> 
