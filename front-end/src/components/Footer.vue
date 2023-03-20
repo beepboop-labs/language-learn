@@ -3,20 +3,38 @@
 </script>
 
 <template>
-  <footer class="page-footer font-small blue pt-4">
-    <div class="container-fluid text-center text-md-left">
-        <div class="row">
-            <div class="col-md-12 mt-md-0 mt-3">
-                <h5 class="text-uppercase">Footer</h5>
-            </div>
-        </div>
-    </div>    
+  <footer id="footer">
+    <div class="links">
+        <div>
+        <a href="https://github.com/beepboop-labs/language-learn"> github </a>
+    </div>
+    <div>
+        <a href="#"> FAQ</a>
+    </div>
+    <div>
+        <a href="https://github.com/beepboop-labs/language-learn/blob/main/LICENSE"> LICENSE</a>
+    </div>   
+    </div> 
 </footer>
 
   
 </template>
 
 <style scoped>
+#footer {
+    background-color: #ffdfa8;
+    height: 100px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+
+}
+
+.links {
+
+}
 
 </style>
 

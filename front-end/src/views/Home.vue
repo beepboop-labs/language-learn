@@ -26,7 +26,7 @@
 .image img {
   display: block;
   margin: auto;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 80%;
+  height: 50%;
 }
 </style>
