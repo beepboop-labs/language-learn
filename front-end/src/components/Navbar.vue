@@ -15,8 +15,10 @@ this.showMobileMenu = !this.showMobileMenu;
 
 <template>
     <div id="navbar">
-        <div class="nav-menu"> 
-            <i class="fas fa-bars" @click="showMenu()"> </i> 
+        <div class="nav-menu">
+            <div class="hamburger" @click="showMenu()" >
+                <font-awesome-icon icon="fa-bars" />
+            </div> 
             <div class="nav-content" :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'"> 
             <div class="logo">
                 <router-link to="/">LOGO</router-link>
@@ -58,7 +60,7 @@ li {
 }
 
 
-i {
+.hamburger {
     display: none;
 }
 
