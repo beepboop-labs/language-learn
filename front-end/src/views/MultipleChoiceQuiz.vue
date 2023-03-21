@@ -116,6 +116,9 @@
 </script>
 
 <template>
+  <br>
+  MULTIPLE CHOICE QUIZ
+  <br><br>
   <div id="multiple-choice-quiz">
     <div class = "progress">{{ quizIndex + 1 }}/{{ quizLength }}</div>
     <div class = "question">
