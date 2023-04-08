@@ -1,6 +1,6 @@
 import { reactive } from 'vue'
 
-export let store = reactive({
+export let userToken = reactive({
   userId: null,
   username: null,
   setUser(userId, username) {
@@ -14,6 +14,10 @@ export let store = reactive({
   },
   getUserId() {
     return this.userId;
+  },
+  clearUser() {
+    this.userId = null;
+    this.username = null;
   }
 
 })

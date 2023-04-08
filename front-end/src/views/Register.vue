@@ -1,5 +1,5 @@
 <script setup>
-  import { store } from '../store.js';
+  import { userToken } from '../user-token.js';
   import { ref, onMounted } from 'vue'
 
   let username = ref("");
@@ -40,7 +40,8 @@
           if(!response.ok){
             throw new Error(response.status + " " + json.message);
           }
-          store.setUser(json.id, json.username)
+          userToken.setUser(json.id, json.username)
+          window.location.href = "/"
       
       })
       .catch(err => {
