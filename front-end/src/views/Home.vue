@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -6,27 +7,23 @@
         </div>
     </div>
   </div>
+
 </template>
 
 <style scoped>
+
+
 .container {
-  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 
 .image{
-  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  width: 213vh;
+  height: 90vh;
 }
 
-.image img {
-  display: block;
-  margin: auto;
-  max-width: 80%;
-  height: 50%;
-}
 </style>
