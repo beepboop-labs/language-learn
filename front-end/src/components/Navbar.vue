@@ -18,11 +18,11 @@ function showMenu() {
             </div> 
             <div class="nav-content" :class="{ 'open-menu': showMobileMenu, 'close-menu': !showMobileMenu }"> 
             <div class="logo">
-                <router-link to="/">LOGO</router-link>
+                <router-link to="/">Home</router-link>
             </div> 
                 <ul class="nav-items">
                     <li>
-                        <router-link to="/multiple-choice">Multiple Choice Quiz</router-link>
+                        <router-link to="/register">Register</router-link>
                     </li>
                 </ul>
             <div class="login-button">
@@ -44,9 +44,11 @@ function showMenu() {
 }
 
 .nav-menu {
-    background-color: #ffdfa8;
+    background-color: #767676;
+    
 }
 .nav-content {
+
     display: flex;
     justify-content: space-between;
     padding: 10px 30px;
