@@ -1,3 +1,4 @@
+
 from app import db
 
 class User(db.Model):
@@ -16,3 +17,4 @@ class Swahili_Progress(db.Model):
     swahili_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     u1_mcq = db.Column(db.String(50))
     u1_filling = db.Column(db.String(100))
+

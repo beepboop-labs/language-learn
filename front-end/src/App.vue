@@ -19,3 +19,9 @@ export default {
   <Footer />
 </template>
 
+<style scoped>
+#content {
+  margin-top: 40px;
+}
+</style>
+
