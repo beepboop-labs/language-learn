@@ -6,6 +6,7 @@ class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     language_id = db.Column(db.Integer, db.ForeignKey('language.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref='activities', lazy=True)
     unit1_quiz1 = db.Column(db.Boolean, default=False);
     unit1_quiz2 = db.Column(db.Boolean, default=False);
     unit1_quiz3 = db.Column(db.Boolean, default=False);
