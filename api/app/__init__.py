@@ -9,10 +9,6 @@ from app import models
 db = SQLAlchemy()
 migrate = Migrate()
 
-class Test(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(64))
-
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Development')
