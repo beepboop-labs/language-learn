@@ -1,6 +1,6 @@
 from app import db
-from app.models.language import Language
-from app.models.user import User
+# from app.models.language import Language
+# from app.models.user import User
 
 class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
