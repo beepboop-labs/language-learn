@@ -1,7 +1,7 @@
 {
     "user-id": 12345,
     "username": "austin",
-    "progress": {
+    "activity": {
       "spanish": {
         "unit1": {
           "completed": true,
