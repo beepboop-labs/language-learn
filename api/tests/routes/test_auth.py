@@ -1,6 +1,3 @@
-from app.models.user import User
-from app.services.auth_service import login_user, register_user
-from app import db
 import json
 
 # SAMPLE CODE FOR INTERACTING WITH DATABASE

@@ -1,7 +1,4 @@
-import os
 import pytest
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from app import create_app, db
 from app.models.user import User
 
