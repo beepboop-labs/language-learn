@@ -19,7 +19,7 @@ import json
 #         assert user_from_db.password == new_user.password
 
 class TestLogin:
-    # test user credentials
+    # existing test user credentials
     # *********************
     # username: test
     # password: password
@@ -75,7 +75,11 @@ class TestLogin:
 
 
 class TestRegister:
-
+    # existing test user credentials
+    # *********************
+    # username: test
+    # password: password
+    
     def test_success(self, client):
         # Send a registers request with the user credentials
         data = {'username': 'new-user', 'password': 'password'}
