@@ -5,7 +5,8 @@ from app.models.phrase import Phrase
 def test_insert_phrases_from_tsv(app, client):
     # Insert phrases from the test TSV file
     filename = 'data/english_spanish_phrases_01.tsv'
-    insert_phrases_from_tsv(filename)
+    with app.app_context():
+        insert_phrases_from_tsv(filename, app)
 
     # Verify that the phrases were inserted into the database
     with app.app_context():
@@ -15,7 +16,7 @@ def test_insert_phrases_from_tsv(app, client):
         assert Language.query.filter_by(name='spanish').first() is not None
 
         # Verify that the phrases were inserted
-        assert len(Phrase.query.all()) == 4
+        assert len(Phrase.query.all()) == 38
         assert Phrase.query.filter_by(primary='walk').first() is not None
         assert Phrase.query.filter_by(primary='run').first() is not None
         assert Phrase.query.filter_by(primary='swim').first() is not None

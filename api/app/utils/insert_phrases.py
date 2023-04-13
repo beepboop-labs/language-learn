@@ -4,10 +4,15 @@ from app import create_app, db
 from app.models.language import Language
 from app.models.phrase import Phrase
 
+# Accepting an app instance as an optional argument is useful for testing
+# because we can pass in the app object from the test
+# When not testing, we dont pass an object and the function will create one
+# This allows the script to be run from the command line
+def insert_phrases_from_tsv(filename, app=None):
 
-def insert_phrases_from_tsv(filename):
-    # Load the Flask app
-    app = create_app()
+    if not app:
+        print("Creating app object from create_app function")
+        app = create_app()
 
     # Read the contents of the TSV file
     with open(filename, 'r') as file:
@@ -18,12 +23,13 @@ def insert_phrases_from_tsv(filename):
         rows = [(row[primary_index], row[secondary_index]) for row in reader]
 
     # Connect to the database and insert the phrases
-    with app.app_context():
+    with app.app_context(): 
         # Create the languages if they do not exist in the database
         primary_lang = Language.query.filter_by(name=header[0].lower()).first()
         if not primary_lang:
             primary_lang = Language(name=header[0].lower())
             db.session.add(primary_lang)
+            
         secondary_lang = Language.query.filter_by(name=header[1].lower()).first()
         if not secondary_lang:
             secondary_lang = Language(name=header[1].lower())
