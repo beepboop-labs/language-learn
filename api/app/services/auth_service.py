@@ -3,7 +3,14 @@ from flask import make_response
 
 def register_user(userdata):
     try:
-        print(userdata)
+        # Check if username and password are provided
+        if 'username' not in userdata or 'password' not in userdata:
+            return make_response({ "message": "username and password required"}, 400)
+        
+        # Validate username and password
+        if len(userdata['username']) < 3 or len(userdata['password']) < 3:
+            return make_response({ "message": "username and password must be at least 3 characters long"}, 400)
+
         # Check if username already exists
         user_check = db.session.execute(db.select(User).filter_by(username=userdata['username'])).scalar()
         print(user_check)
@@ -32,11 +39,14 @@ def register_user(userdata):
     
 def login_user(credentials):
     try:
+        # Check if username and password are provided
+        if 'username' not in credentials or 'password' not in credentials:
+            return make_response({ "message": "username and password required"}, 400)
+
         # Check if username already exists
         user = db.session.execute(db.select(User).filter_by(username=credentials['username'])).scalar()
-        print(user)
         if not user:
-            return make_response({ "message": "username not found"}, 400)
+            return make_response({ "message": "username not found"}, 401)
         else:
             #TODO: use seperate method for hashing and validating password
             #TODO: login should return JWT token or something. Right now it doesnt do anything
@@ -44,11 +54,11 @@ def login_user(credentials):
             if credentials['password'] == user.password:
                 return make_response({
                     'message': "User successfuly authenticated",
-                    'username': {user.username},
-                    'id': {user.id},
+                    'username': user.username,
+                    'id': user.id,
                 }, 200)
             else:
-                return make_response({'message': 'Incorrect password'}, 409)
+                return make_response({'message': 'Incorrect password'}, 401)
 
     except Exception as e:
         print(e);
