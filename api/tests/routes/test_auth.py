@@ -79,7 +79,7 @@ class TestRegister:
     # *********************
     # username: test
     # password: password
-    
+
     def test_success(self, client):
         # Send a registers request with the user credentials
         data = {'username': 'new-user', 'password': 'password'}
@@ -101,21 +101,21 @@ class TestRegister:
         assert response.status_code == 409
 
     def test_empty_username(self, client):
-        data = {'username': '', 'password': 'wrong'}
+        data = {'username': '', 'password': 'password'}
         response = client.post('/register', data=json.dumps(data), content_type='application/json')
 
         # Check response is bad request
         assert response.status_code == 400
 
     def test_empty_password(self, client):
-        data = {'username': 'test', 'password': ''}
+        data = {'username': 'new-user', 'password': ''}
         response = client.post('/register', data=json.dumps(data), content_type='application/json')
 
         # Check response is bad request
         assert response.status_code == 400
 
     def test_missing_property(self, client):
-        data = {'username': 'test'}
+        data = {'username': 'new-user'}
         response = client.post('/register', data=json.dumps(data), content_type='application/json')
 
         # Check response is bad request
