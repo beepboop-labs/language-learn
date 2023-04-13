@@ -1,5 +1,6 @@
 from app.models.user import User, db
 from flask import make_response
+import re
 
 def register_user(userdata):
     try:
@@ -10,7 +11,10 @@ def register_user(userdata):
         # Validate username and password
         if len(userdata['username']) < 3 or len(userdata['password']) < 3:
             return make_response({ "message": "username and password must be at least 3 characters long"}, 400)
-
+        
+        if bool(re.search(r"\s", userdata['username'])) or bool(re.search(r"\s", userdata['password'])):
+            return make_response({ "message": "username and password cannot contain spaces"}, 400)
+        
         # Check if username already exists
         user_check = db.session.execute(db.select(User).filter_by(username=userdata['username'])).scalar()
         print(user_check)

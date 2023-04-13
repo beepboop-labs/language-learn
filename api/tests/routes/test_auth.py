@@ -121,5 +121,17 @@ class TestRegister:
         # Check response is bad request
         assert response.status_code == 400
 
+    def test_invalid_username(self, client):
+        data = {'username': 'new user', 'password': 'password'}
+        response = client.post('/register', data=json.dumps(data), content_type='application/json')
 
+        # Check response is bad request
+        assert response.status_code == 400
+
+    def test_invalid_password(self, client):
+        data = {'username': 'newuser', 'password': 'pass word'}
+        response = client.post('/register', data=json.dumps(data), content_type='application/json')
+
+        # Check response is bad request
+        assert response.status_code == 400
 
