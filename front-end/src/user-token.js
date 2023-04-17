@@ -1,14 +1,18 @@
 import { reactive } from 'vue'
 
-export let userToken = reactive({
+export const userToken = reactive({
   userId: null,
   username: null,
   loggedin: false,
    
   setUser(userId, username) {
-    this.userId = userId,
+    console.log(userId)
+    console.log(username)
+    console.log(this.loggedin)
+    this.userId = userId
     this.username = username
     this.loggedin = true
+    console.log(this.loggedin)
     console.log("successfully set user in store")
   },
   getUsername(){

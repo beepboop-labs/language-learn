@@ -1,6 +1,6 @@
-<script>
+<script setup>
 import { userToken } from '../user-token';
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 let loggedin = ref(userToken.getLoggedIn())
 // This is a built-in lifecycle hook from Vue
@@ -8,6 +8,10 @@ onMounted(() => {
    loggedin.value = userToken.getLoggedIn()
     
   });
+
+  watch(userToken, () => {
+  loggedin.value = userToken.getLoggedIn()
+})
 
 </script>
 
@@ -43,12 +47,6 @@ onMounted(() => {
       <li>Blank Quiz</li>
       <li>True/False</li>
     </ul>
-  </div>
-
-
-  <div>
-    <LoginMessage />
-    <Roadmap />
   </div>
 </template>
 

@@ -1,6 +1,7 @@
 <script setup>
   import { userToken } from '../user-token.js';
   import { ref, onMounted } from 'vue';
+  import { useRouter, useRoute } from 'vue-router'
 
   let username = ref("");
   let password = ref("");
@@ -10,6 +11,7 @@
     const options = { 
       username: username.value,
       password: password.value 
+     
     }
 
     // send login data to the API 
@@ -26,7 +28,9 @@
             throw new Error(response.status + " " + json.message);
           }
           userToken.setUser(json.id, json.username)
-          window.location.href = "/"   
+          const router = useRouter()
+          router.push("/")  
+          
       })
       .catch(err => {
         alert('Unable to login. ' + err)
