@@ -70,7 +70,6 @@ class TestLogin:
         # Check response is bad request
         assert response.status_code == 400
 
-
 class TestRegister:
     # existing test user credentials
     # *********************
@@ -132,3 +131,11 @@ class TestRegister:
         # Check response is bad request
         assert response.status_code == 400
 
+class TestQuiz:
+
+	def test_quiz(self, client):
+		data = {'username': 'newuser', 'password': 'pass word'}
+		response = client.post('/quiz', data=json.dumps(data), content_type='application/json')
+
+		# Check that the response is successful
+		assert response.status_code == 200
