@@ -1,4 +1,7 @@
 from app.models.user import User, db
+from app.models.language import Language
+from app.models.activity import Activity
+
 from flask import make_response
 import re
 
@@ -25,7 +28,18 @@ def register_user(userdata):
             username = userdata['username']
             password = userdata['password']
 
+            # TODO: TEST ALL OF THIS ACTIVITY STUFF
+            spanish = Language.query.filter_by(name='spanish').first()
+            swahili = Language.query.filter_by(name='swahili').first()
+
             new_user = User(username=username, password=password)
+
+            spanish_activity = Activity(language_id=spanish.id, user=new_user)
+            swahili_activity = Activity(language_id=swahili.id, user=new_user) 
+
+            new_user.activities.append(spanish_activity)
+            new_user.activities.append(swahili_activity)
+
             db.session.add(new_user)
             db.session.commit()
 
