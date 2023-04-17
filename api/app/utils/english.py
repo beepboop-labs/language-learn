@@ -37,11 +37,7 @@ def build_english(verbString):
 
     negative, subject, tense, root = parse_string(verbString)
 
-    print(negative, subject, tense, root)
-
     phrase = root
-
-    print(phrase)
 
     if tense == 'IMP':
         return root
