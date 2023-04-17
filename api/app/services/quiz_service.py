@@ -2,12 +2,15 @@ from flask import make_response, jsonify
 import json
 from app.models.phrase import Phrase
 from app.models.language import Language
+
+from app.utils.english import build_english
+
 from sqlalchemy import func
 
 def get_quiz(specifications):
     # specifications is a dictionary of specifications for the quiz
-    # {"length": 10, "unit": 1, "primaryLanguage": "English",
-    #  "secondaryLanguage": "Spanish"} for example
+    # {"length": 10, "unit": 1, "primaryLanguage": "english",
+    #  "secondaryLanguage": "spanish"} for example
 
     #TODO: add logic for different kinds of quiz data based on specifications
     try:
@@ -15,19 +18,25 @@ def get_quiz(specifications):
         f = open('data/sample_data.json')
         quiz_data = json.load(f)
 
-        newQuiz = {};
+        newQuiz = {
+            "words": [],
+        }
 
-
-        print(specifications)
-        print(specifications['length'])
+        new_word_pair = {}
 
         # get requested language
         language = Language.query.filter_by(name=specifications['secondaryLanguage']).first()
-        print(language.id)
+
         # Get list of verbs from the database of specified length
         word_pairs = Phrase.query.filter_by(secondary_language=language).order_by(func.random()).limit(specifications['length']).all()
-        print(language)
-        print(word_pairs)
+
+
+        for word in word_pairs:
+            conjugation_str= "NEG+3s+PRES+"
+            full_str = conjugation_str + word.primary
+            print(full_str)
+            english = build_english(full_str)
+            print(english)
 
         return make_response(jsonify(quiz_data), 200)
 
