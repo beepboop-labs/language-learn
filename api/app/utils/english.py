@@ -74,7 +74,7 @@ def build_english(verbString):
             # This works for 1 syllable words but
             # the rules are more complex for 2 syllable words
             elif (root[-3] in consonants and
-                    root[-2] in voewls and
+                    root[-2] in vowels and
                       root[-1] in consonants):
                 phrase = root + root[-1] + 'ed'            
             else:
@@ -89,7 +89,7 @@ def build_english(verbString):
         return phrase
     
     if tense == 'FUT':
-        helping_verb = {
+        helping_verbs = {
             '1p': 'will',
             '2p': 'will',
             '3p': 'will',
@@ -99,16 +99,16 @@ def build_english(verbString):
         }
 
         if negative == False:
-            phrase = pronouns[subject] + ' ' + helping_verb[subject] + ' ' + phrase
+            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' ' + phrase
         else:
-            phrase = pronouns[subject] + ' ' + helping_verb[subject] + ' not ' + phrase
+            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
         
         return phrase
     
     if tense == 'PRES':
         print("entering PRESENT CONJUGATION")
         es_suffix = ('ss', 'x', 'ch', 'sh', 'o', 'z')
-        helping_verb = {
+        helping_verbs = {
             '1p': 'do',
             '2p': 'do',
             '3p': 'do',
@@ -126,12 +126,12 @@ def build_english(verbString):
             else:
                 phrase = pronouns[subject] + ' ' + phrase + 's'
         else:
-            phrase = pronouns[subject] + ' ' + helping_verb[subject] + ' not ' + phrase
+            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
 
         return phrase
     
     if tense == 'PERF':
-        helping_verb = {
+        helping_verbs = {
             '1p': 'have',
             '2p': 'have',
             '3p': 'have',
@@ -152,7 +152,7 @@ def build_english(verbString):
             # This works for 1 syllable words but
             # the rules are more complex for 2 syllable words
             elif (root[-3] in consonants and
-                    root[-2] in voewls and
+                    root[-2] in vowels and
                       root[-1] in consonants):
                 phrase = root + root[-1] + 'ed'            
             else:

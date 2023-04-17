@@ -7,6 +7,7 @@ from app.utils.english import build_english
 from app.utils.spanish import build_spanish
 
 from sqlalchemy import func
+from random import randrange
 
 def get_quiz(specifications):
     # specifications is a dictionary of specifications for the quiz
@@ -33,8 +34,11 @@ def get_quiz(specifications):
 
 
         for word in word_pairs:
-            conjugation_str= "NEG+3s+PRES+"
-            
+            conjugation_options= ["NEG+3s+PRES+", "1p+IMP+", "3p+PERF+", "NEG+2p+FUT+", "1p+PAS+", "NEG+3s+PAS+" ]
+            conjugation_str = conjugation_options[randrange(len(conjugation_options))]
+
+
+
             eng_full_str = conjugation_str + word.primary
             print(eng_full_str)
             english = build_english(eng_full_str)
