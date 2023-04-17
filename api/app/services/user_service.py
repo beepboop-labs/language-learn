@@ -14,3 +14,15 @@ def get_activity(user):
 
     except Exception as e:
         return make_response({'message': str(e)}, 500)
+    
+
+def complete_quiz(quiz):
+    try:
+      
+    
+    
+        print(quiz,flush=True)
+        return make_response("Record Updated Successfully", 200)
+
+    except Exception as e:
+        return make_response({'message': str(e)}, 500)
