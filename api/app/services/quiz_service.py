@@ -16,10 +16,7 @@ def get_quiz(specifications):
 
     #TODO: add logic for different kinds of quiz data based on specifications
     try:
-        # SAMPLE QUIZ DATA
-        f = open('data/sample_data.json')
-        quiz_data = json.load(f)
-
+        
         new_quiz = {
             "words": [],
         }
