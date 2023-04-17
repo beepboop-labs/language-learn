@@ -1,6 +1,8 @@
 import pytest
 from app import create_app, db
 from app.models.user import User
+from app.models.language import Language
+from app.models.activity import Activity
 
 
 @pytest.fixture(scope="module")
@@ -16,7 +18,24 @@ def app():
     # Create and seed the test database
     with app.app_context():
         db.create_all()
-        db.session.add(User(username='test', password='password'))
+        db.session.add(Language(name='spanish'))
+        db.session.add(Language(name='english'))
+        db.session.add(Language(name='swahili'))
+
+        span = Language.query.filter_by(name='spanish').first()
+        engl = Language.query.filter_by(name='english').first()
+        swah = Language.query.filter_by(name='swahili').first()
+
+        user = User(username='test', password='password')
+
+        spanish_activity = Activity(language_id=span.id, user_id=user.id)
+        swahili_activity = Activity(language_id=swah.id, user_id=user.id)
+
+        user.activities.append(spanish_activity)
+        user.activities.append(swahili_activity)
+
+        db.session.add(user)
+
         db.session.commit()
         # Add test data here if necessary
 
