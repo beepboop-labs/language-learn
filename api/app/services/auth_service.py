@@ -29,8 +29,8 @@ def register_user(userdata):
             password = userdata['password']
 
             # TODO: TEST ALL OF THIS ACTIVITY STUFF
-            spanish = Language.query.filter_by(name='spanish').first()
-            swahili = Language.query.filter_by(name='swahili').first()
+            spanish = Language.query.filter_by(name='spanish').lower().first()
+            swahili = Language.query.filter_by(name='swahili').lower().first()
 
             new_user = User(username=username, password=password)
 
