@@ -1,5 +1,6 @@
 from flask import make_response, jsonify
 import json
+from sqlalchemy import func
 from app.models.phrase import Phrase
 from app.models.language import Language
 
@@ -10,9 +11,7 @@ from sqlalchemy import func
 from random import randrange
 
 def get_quiz(specifications):
-    # specifications is a dictionary of specifications for the quiz
-    # {"length": 10, "unit": 1, "primaryLanguage": "english",
-    #  "secondaryLanguage": "spanish"} for example
+
 
     #TODO: add logic for different kinds of quiz data based on specifications
     try:
