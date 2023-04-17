@@ -5,10 +5,9 @@ import { ref, onMounted } from 'vue';
 let showMobileMenu= ref(false);
 
 function showMenu() {
-    showMobileMenu = !showMobileMenu;
+    showMobileMenu.value = !showMobileMenu.value;
 }
     
-
 </script>
 
 <template>
@@ -17,13 +16,19 @@ function showMenu() {
             <div class="hamburger" @click="showMenu" >
                 <font-awesome-icon icon="fa-bars" />
             </div> 
-            <div class="nav-content" :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'"> 
+            <div class="nav-content" :class="{ 'open-menu': showMobileMenu, 'close-menu': !showMobileMenu }"> 
             <div class="logo">
                 <router-link to="/">Home</router-link>
             </div> 
                 <ul class="nav-items">
                     <li>
                         <router-link to="/register">Register</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/blankquiz">BlankQuiz</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/truefalse">TrueFalse</router-link>
                     </li>
                 </ul>
             <div class="login-button">
@@ -35,6 +40,15 @@ function showMenu() {
 </template>
 
 <style scoped>
+#navbar {
+    background-color: #ffdfa8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+}
+
 .nav-menu {
     background-color: #767676;
     
@@ -59,25 +73,28 @@ li {
     padding: 0 10px;   
 }
 
-:-webkit-any-link {
-  color: white;
-}
 .hamburger {
     display: none;
 }
 
 /* Mobile version - hidden hamburger menu */
 @media screen and (max-width: 768px) {
-.nav-menu {
+#navbar {
     padding-top: 10px;
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+}
+
+.nav-menu {
+    background-color: #ffdfa8;
 }
 .open-menu {
     opacity: 1;
     height: 150px;
 }
-.closed-menu {
+.close-menu {
     opacity: 0;
     height: 0;
     padding: 0;
@@ -92,7 +109,7 @@ li {
     flex-direction: column;
 }
 
-i {
+.hamburger {
     display: block;
     text-align: right;
     padding: 0 10px 10px 0;
