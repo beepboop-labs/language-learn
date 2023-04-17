@@ -131,6 +131,7 @@ class TestRegister:
         # Check response is bad request
         assert response.status_code == 400
 
+<<<<<<< HEAD
 class TestQuiz:
 
 	def test_quiz(self, client):
@@ -139,3 +140,28 @@ class TestQuiz:
 
 		# Check that the response is successful
 		assert response.status_code == 200
+=======
+class TestUserActivity:
+
+    def test_success(self, client):
+        # Send a login request with the user credentials
+        data = {'userId': 1}
+        response = client.post('/user/activity', data=json.dumps(data), content_type='application/json')
+
+        # Check that the response is successful
+        assert response.status_code == 200
+
+        # Check that the response contains the user token
+        response_data = json.loads(response.data)
+        assert 'activity' in response_data
+
+
+class TestUserCompleteQuiz:
+        def test_success(self, client):
+            data = {'quiz' : 'u1q1'}
+            response = client.post('/user/complete-quiz', data=json.dumps(data), content_type='application/json')
+            assert response.status_code == 200
+
+
+
+>>>>>>> b77660a (Test for endpoints)
