@@ -1,5 +1,19 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch} from 'vue';
+import { userToken } from '../user-token';
+
+let username = ref(userToken.getUsername())
+// This is a built-in lifecycle hook from Vue
+onMounted(() => {
+  
+   username.value = userToken.getUsername()
+  
+    
+  });
+
+  watch(userToken, () => {
+  username.value = userToken.getUsername()
+})
     
     
 let showMobileMenu= ref(false);
@@ -25,15 +39,19 @@ function showMenu() {
                         <router-link to="/register">Register</router-link>
                     </li>
                     <li>
+                        <router-link to="/multiple-choice">Multiple Choice Quiz</router-link>
+                    </li>
+                    <li>
                         <router-link to="/blankquiz">BlankQuiz</router-link>
                     </li>
                     <li>
                         <router-link to="/truefalse">TrueFalse</router-link>
                     </li>
                 </ul>
-            <div class="login-button">
+            <div v-if="!username" class="login-button">
                 <router-link to="/login">Login</router-link>
             </div>
+            <div v-if="username" class="username">{{ username }}</div>
             </div>
         </div>
     </div>
@@ -114,6 +132,7 @@ li {
     text-align: right;
     padding: 0 10px 10px 0;
 }
+
 
 }
 </style>
