@@ -134,7 +134,7 @@ class TestRegister:
 class TestQuiz:
 
 	def test_quiz(self, client):
-		data = {'username': 'newuser', 'password': 'pass word'}
+		data = {"length": 10, "unit": 1, "primaryLanguage": "english", "secondaryLanguage": "spanish"}
 		response = client.post('/quiz', data=json.dumps(data), content_type='application/json')
 
 		# Check that the response is successful
@@ -152,7 +152,7 @@ class TestUserActivity:
 
         # Check that the response contains the user token
         response_data = json.loads(response.data)
-        assert 'activity' in response_data
+        assert 'username' in response_data
 
 
 class TestUserCompleteQuiz:

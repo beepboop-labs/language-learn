@@ -11,7 +11,8 @@ from sqlalchemy import func
 from random import randrange
 
 def get_quiz(specifications):
-
+    # accepts a dictionary of specifications for the quiz
+    # example: { "length": 10, "unit": 1, "primaryLanguage": "english", "secondaryLanguage": "spanish" }
 
     #TODO: add logic for different kinds of quiz data based on specifications
     try:
