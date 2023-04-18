@@ -55,9 +55,7 @@ onMounted(() => {
 
 function getActivity(){
   const options = { 
-
       username: userToken.getUsername(),
-      
       
     }
 
@@ -101,7 +99,7 @@ function getActivity(){
     <ul>
       
       <li>
-        <span>Multiple Choice Quiz</span>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{language: 'spanish', unit: 1}}">Multiple Choice Quiz</router-link>
         <span v-if="activity.spanish.unit1.q1">  -->Completed</span>
       </li>
       <li>

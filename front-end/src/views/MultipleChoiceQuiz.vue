@@ -108,6 +108,8 @@
   // This is a built-in lifecycle hook from Vue
   onMounted(() => {
     console.log("Quiz mounted");
+    console.log(this.$route.params.langauge)
+    console.log(this.$route.params.unit)
     initializeQuiz()
   });
  
