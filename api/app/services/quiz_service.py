@@ -4,8 +4,8 @@ from sqlalchemy import func
 from app.models.phrase import Phrase
 from app.models.language import Language
 
-from app.utils.english import build_english
-from app.utils.spanish import build_spanish
+from app.utils.english import conjugate_english
+from app.utils.spanish import conjugate_spanish
 
 from sqlalchemy import func
 from random import randrange
@@ -37,12 +37,12 @@ def get_quiz(specifications):
 
             eng_full_str = conjugation_str + word.primary
             print(eng_full_str)
-            english = build_english(eng_full_str)
+            english = conjugate_english(eng_full_str)
             print(english)
 
             secondary_full_str = conjugation_str + word.secondary;
             print(secondary_full_str)
-            spanish = build_spanish(secondary_full_str)
+            spanish = conjugate_spanish(secondary_full_str)
             print(spanish)
 
             new_word_pair = { "primary": english, "secondary": spanish }

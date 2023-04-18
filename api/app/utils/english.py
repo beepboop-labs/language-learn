@@ -30,7 +30,7 @@ def parse_string(s):
     return negative, subject, tense, root
     
 
-def build_english(verbString):
+def conjugate_english(verbString):
     # negative: True, False
     # subject: 1p, 2p, 3p, 1s, 2s, 3s
     # tense: IMP, PAS, FUT, PRES, PERF

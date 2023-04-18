@@ -15,7 +15,7 @@ def parse_string(s):
     
     return negative, subject, tense, root
 
-def build_spanish(verbString):
+def conjugate_spanish(verbString):
     # negative: True, False
     # subject: 1p, 2p, 3p, 1s, 2s, 3s
     # tense: IMP, PAS, FUT, PRES, PERF
