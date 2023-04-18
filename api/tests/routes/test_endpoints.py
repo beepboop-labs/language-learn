@@ -144,7 +144,7 @@ class TestUserActivity:
 
         # Check that the response contains the user token
         response_data = json.loads(response.data)
-        assert 'activity' in response_data
+        assert 'spanish' in response_data
 
 
 class TestUserCompleteQuiz:
