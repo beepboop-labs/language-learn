@@ -5,13 +5,13 @@
 
   let username = ref("");
   let password = ref("");
-
+  const router = useRouter();
   function login() {
 
     const options = { 
       username: username.value,
       password: password.value 
-     
+      
     }
 
     // send login data to the API 
@@ -28,7 +28,7 @@
             throw new Error(response.status + " " + json.message);
           }
           userToken.setUser(json.id, json.username)
-          const router = useRouter()
+          
           router.push("/")  
           
       })
