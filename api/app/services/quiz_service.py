@@ -31,7 +31,7 @@ def get_quiz(specifications):
 
 
         for word in word_pairs:
-            conjugation_options= ["NEG+3s+PRES+", "1p+IMP+", "3p+PERF+", "NEG+2p+FUT+", "1p+PAS+", "NEG+3s+PAS+" ]
+            conjugation_options= ["NEG+3s+PRES+", "1p+IMP+", "3p+PERF+", "NEG+2p+FUT+", "1p+PAST+", "NEG+3s+PAST+" ]
             conjugation_str = conjugation_options[randrange(len(conjugation_options))]
 
 

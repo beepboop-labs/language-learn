@@ -1,3 +1,10 @@
+import json
+
+f = open('data/irregular_english_verbs.json')
+irregular_verbs = json.load(f)
+
+f = open('data/very_irregular_english_verbs.json')
+very_irregular_verbs = json.load(f)
 
 pronouns = {
     '1p': 'we',
@@ -11,6 +18,31 @@ pronouns = {
 consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z']
 
 vowels = ['a', 'e', 'i', 'o', 'u']
+
+def check_irregular(str, tense, subj):
+    
+    if str in very_irregular_verbs:
+        print("VERY IRREGULAR VERB DETECTED")
+        print(str, tense, subj)
+        if tense in very_irregular_verbs[str]:
+            if subj in very_irregular_verbs[str][tense]:
+                return very_irregular_verbs[str][tense][subj]
+            else:
+                print("Subject not found. Check irregular verbs!")
+                return False
+        else:
+            print("Tense not found. Check irregular verbs!")
+            return False
+    elif str in irregular_verbs:
+        print("IRREGULAR VERB DETECTED")
+        print(str, tense, subj)
+        if tense in irregular_verbs[str]:
+            return irregular_verbs[str][tense]
+        else:
+            print("Tense not found. Check irregular verbs!")
+            return False
+    else:
+        return False
 
 def parse_string(s):
     parts = s.split('+')
@@ -39,10 +71,16 @@ def conjugate_english(verbString):
 
     phrase = root
 
+    # Check if verb is irregular
+    irregular = check_irregular(phrase, tense, subject)
+    if irregular:
+        phrase = irregular
+
+
     if tense == 'IMP':
-        return root
+        return phrase
     
-    if tense == 'PAS':
+    if tense == 'PAST':
         # NOTES:
 
         # "to be <verb>" form phrases are irregular and dont work yet
@@ -63,28 +101,32 @@ def conjugate_english(verbString):
         }
 
         if negative == False:
-            if root.endswith('e'):
-                phrase = root + 'd'
-            elif root.endswith('y'):
-                if root[-1] in consonants:
-                    phrase = root[:-1] + 'ied'
-                elif root[-1] in vowels:
-                    phrase = root + 'ed'
 
-            # This works for 1 syllable words but
-            # the rules are more complex for 2 syllable words
-            elif (root[-3] in consonants and
-                    root[-2] in vowels and
-                      root[-1] in consonants):
-                phrase = root + root[-1] + 'ed'            
-            else:
-                phrase = root + 'ed'
+            if irregular == False:
+
+                if root.endswith('e'):
+                    phrase = root + 'd'
+                elif root.endswith('y'):
+                    if root[-1] in consonants:
+                        phrase = root[:-1] + 'ied'
+                    elif root[-1] in vowels:
+                        phrase = root + 'ed'
+
+                # This works for 1 syllable words but
+                # the rules are more complex for 2 syllable words
+                elif (root[-3] in consonants and
+                        root[-2] in vowels and
+                        root[-1] in consonants):
+                    phrase = root + root[-1] + 'ed'            
+                else:
+                    phrase = root + 'ed'
             
             phrase = pronouns[subject] + ' ' + phrase
 
         # negative past tense gets helping verb
+        #takes root instead of past tense for negative. For irregulars
         else:
-            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
+            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + root 
             
         return phrase
     
@@ -106,7 +148,6 @@ def conjugate_english(verbString):
         return phrase
     
     if tense == 'PRES':
-        print("entering PRESENT CONJUGATION")
         es_suffix = ('ss', 'x', 'ch', 'sh', 'o', 'z')
         helping_verbs = {
             '1p': 'do',
@@ -118,13 +159,15 @@ def conjugate_english(verbString):
         }
 
         if negative == False:
+            if irregular == False:
             
-            if phrase.endswith(es_suffix) and subject == '3s':
-                phrase = pronouns[subject] + ' ' + phrase + 'es'
-            elif phrase[-2] in consonants and phrase.endswith('y') and subject == '3s':
-                phrase = pronouns[subject] + ' ' + phrase[:-1] + 'ies'
-            else:
-                phrase = pronouns[subject] + ' ' + phrase + 's'
+                if phrase.endswith(es_suffix) and subject == '3s':
+                    phrase = phrase + 'es'
+                elif phrase[-2] in consonants and phrase.endswith('y') and subject == '3s':
+                    phrase = phrase[:-1] + 'ies'
+                else:
+                    phrase = phrase + 's'
+            phrase = pronouns[subject] + ' ' + phrase
         else:
             phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
 
@@ -141,26 +184,26 @@ def conjugate_english(verbString):
         }
 
         if negative == False:
-            if root.endswith('e'):
-                phrase = root + 'd'
-            elif root.endswith('y'):
-                if root[-1] in consonants:
-                    phrase = root[:-1] + 'ied'
-                elif root[-1] in vowels:
-                    phrase = root + 'ed'
+            if irregular == False:
+                if phrase.endswith('e'):
+                    phrase = root + 'd'
+                elif phrase.endswith('y'):
+                    if phrase[-1] in consonants:
+                        phrase = phrase[:-1] + 'ied'
+                    elif phrase[-1] in vowels:
+                        phrase = phrase + 'ed'
 
-            # This works for 1 syllable words but
-            # the rules are more complex for 2 syllable words
-            elif (root[-3] in consonants and
-                    root[-2] in vowels and
-                      root[-1] in consonants):
-                phrase = root + root[-1] + 'ed'            
-            else:
-                phrase = root + 'ed'
+                # This works for 1 syllable words but
+                # the rules are more complex for 2 syllable words
+                elif (phrase[-3] in consonants and
+                        phrase[-2] in vowels and
+                        phrase[-1] in consonants):
+                    phrase = phrase + phrase[-1] + 'ed'            
+                else:
+                    phrase = phrase + 'ed'
             
             phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' ' + phrase
 
-        # negative past tense gets helping verb
         else:
             phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
 

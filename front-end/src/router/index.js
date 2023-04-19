@@ -14,9 +14,10 @@ const routes = [
         component: Home,
     },
     {
-        path: "/multiple-choice",
+        path: "/multiple-choice/:secondaryLanguage/:unit",
         name: "MultipleChoiceQuiz",
         component: MultipleChoiceQuiz,
+        props: true,
     },
     {
         path: "/login",
@@ -29,14 +30,16 @@ const routes = [
         component: Register,
     },
     {
-        path: "/blankquiz",
+        path: "/blankquiz/:secondaryLanguage/:unit",
         name: "BlankQuiz",
         component: BlankQuiz,
+        props: true,
     },
     {
-        path: "/truefalse",
+        path: "/truefalse/:secondaryLanguage/:unit",
         name: "TrueFalse",
         component: TrueFalse,
+        props: true,
     }
 ];
 

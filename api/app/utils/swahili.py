@@ -15,7 +15,7 @@ def parse_string(s):
     
     return negative, subject, tense, root
 
-def conjugate_spanish(verbString):
+def conjugate_swahili(verbString):
     # negative: True, False
     # subject: 1p, 2p, 3p, 1s, 2s, 3s
     # tense: IMP, PAST, FUT, PRES, PERF

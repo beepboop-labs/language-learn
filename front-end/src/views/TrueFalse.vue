@@ -1,13 +1,23 @@
 <script setup>
   import { ref, onMounted } from 'vue'
 
+  const props = defineProps({
+  secondaryLanguage: {
+    type: String,
+    required: true
+  },
+  unit: {
+    type: Number,
+    required: true
+  }
+})
   // const fetch = require('node-fetch');
   const quizURL = "http://127.0.0.1:5000/quiz"
 
   let data
   let quizIndex = ref(0)
-  let englishWord  = ref("")
-  let spanishWord = ref("")
+  let primaryWord  = ref("")
+  let secondaryWord = ref("")
   let questions = []
   let quizLength = 0
   let selectedAnswer = ref("")
@@ -22,8 +32,8 @@
 
       if(coinToss == 0){ //generate a pair that matches
         let question = {
-          english: data.words[i].english,
-          spanish: data.words[i].spanish,
+          primary: data.words[i].primary,
+          secondary: data.words[i].secondary,
           match: true
         }
 
@@ -36,8 +46,8 @@
         }
 
         let question = {
-          english: data.words[i].english,
-          spanish: data.words[wrongIndex].spanish,
+          primary: data.words[i].primary,
+          secondary: data.words[wrongIndex].secondary,
           match: false
         }
 
@@ -47,9 +57,9 @@
 
     }
 
-    englishWord.value = questions[quizIndex.value].english
+    primaryWord.value = questions[quizIndex.value].primary
 
-    spanishWord.value = questions[quizIndex.value].spanish
+    secondaryWord.value = questions[quizIndex.value].secondary
   }
 
   function isCorrectAnswer(){
@@ -67,8 +77,8 @@
 
     quizIndex.value +=1
 
-    englishWord.value  = questions[quizIndex.value].english
-    spanishWord.value = questions[quizIndex.value].spanish
+    primaryWord.value  = questions[quizIndex.value].primary
+    secondaryWord.value = questions[quizIndex.value].secondary
 
     selectedAnswer.value = ""
     message.value = ""
@@ -97,7 +107,7 @@
 
   function initializeQuiz() {
     //POST request options
-    const options = {}
+    const options = {"primaryLanguage": "primary", secondaryLanguage: props.secondaryLanguage, "unit": props.unit, "length": 10}
 
     // Fetch the quiz data from the API
     fetch(quizURL, {
@@ -108,8 +118,8 @@
       .then(json => {
         data = json;
         
-        // englishWord.value = data.words[quizIndex.value].english;
-        // spanishWord.value = data.words[quizIndex.value].spanish;
+        // primaryWord.value = data.words[quizIndex.value].primary;
+        // secondaryWord.value = data.words[quizIndex.value].secondary;
         quizLength = data.words.length;
 
         setQuestions()
@@ -133,10 +143,10 @@
     <div id="true-false-quiz">
       <div class="progress">{{ quizIndex + 1 }}/{{ quizLength }}</div>
       <div class="question">
-        <div>Does the below translation from english to spanish is True/False?</div>
-        <span class="prompt">{{ englishWord }}</span>
+        <div>Does the below translation from primary to secondary is True/False?</div>
+        <span class="prompt">{{ primaryWord }}</span>
         <br/>
-        <span class="prompt">{{ spanishWord }}</span>
+        <span class="prompt">{{ secondaryWord }}</span>
       </div>
       <div class="options">
         <input type="radio" id="true" name="answers" value="true" v-model="selectedAnswer">

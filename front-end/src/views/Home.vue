@@ -94,54 +94,54 @@ function getActivity(){
   <!-- <div>{{ activity.spanish.unit1.q1 }}</div> -->
   <div id="roadmap" v-if="loggedin">
     <h1>SPANISH</h1>
-    <h2>Unit 1 (present, preterite, imperfect)</h2>
+    <h2>Unit 1</h2>
     <p></p>
     <ul>
       
       <li>
-        <router-link :to="{name: 'MultipleChoiceQuiz', params:{language: 'spanish', unit: 1}}">Multiple Choice Quiz</router-link>
-        <span v-if="activity.spanish.unit1.q1">  -->Completed</span>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 1}}">Multiple Choice</router-link>
+        <span v-if="activity.spanish.unit1.q1">  -->Completed!</span>
       </li>
       <li>
-        <span>Blank Quiz</span>
-        <span v-if="activity.spanish.unit1.q2">  -->Completed</span>
+        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: 'spanish', unit: 1}}">Fill in the Blank</router-link>
+        <span v-if="activity.spanish.unit1.q2">  -->Completed!</span>
       </li>
       <li>
-        <span>True/False</span>
-        <span v-if="activity.spanish.unit1.q3">  -->Completed</span>
+        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 1}}">True or False</router-link>
+        <span v-if="activity.spanish.unit1.q3">  -->Completed!</span>
       </li>
     </ul>
-    <h2>Unit 2 (past)</h2>
+    <h2>Unit 2</h2>
     <p></p>
     <ul>
       <li>
-        <span>Multiple Choice Quiz</span>
-        <span v-if="activity.spanish.unit2.q1">  -->Completed</span>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 2}}">Multiple Choice</router-link>
+        <span v-if="activity.spanish.unit2.q1">  -->Completed!</span>
       </li>
       <li>
-        <span>Blank Quiz</span>
-        <span v-if="activity.spanish.unit2.q2">  -->Completed</span>
+        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: 'spanish', unit: 2}}">Fill in the Blank</router-link>
+        <span v-if="activity.spanish.unit2.q2">  -->Completed!</span>
       </li>
       <li>
-        <span>True/False</span>
-        <span v-if="activity.spanish.unit2.q3">  -->Completed</span>
+        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 2}}">True or False</router-link>
+        <span v-if="activity.spanish.unit2.q3">  -->Completed!</span>
       </li>
       
     </ul>
-    <h2>Unit 3 (Conditional, Future)</h2>
+    <h2>Unit 3</h2>
     <p></p>
     <ul>
       <li>
-        <span>Multiple Choice Quiz</span>
-        <span v-if="activity.spanish.unit3.q1">  -->Completed</span>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 3}}">Multiple Choice</router-link>
+        <span v-if="activity.spanish.unit3.q1">  -->Completed!</span>
       </li>
       <li>
-        <span>Blank Quiz</span>
-        <span v-if="activity.spanish.unit3.q2">  -->Completed</span>
+        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: 'spanish', unit: 3}}">Fill in the Blank</router-link>
+        <span v-if="activity.spanish.unit3.q2">  -->Completed!</span>
       </li>
       <li>
-        <span>True/False</span>
-        <span v-if="activity.spanish.unit3.q3">  -->Completed</span>
+        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 3}}">True or False</router-link>
+        <span v-if="activity.spanish.unit3.q3">  -->Completed!</span>
       </li>
     </ul>
   </div>

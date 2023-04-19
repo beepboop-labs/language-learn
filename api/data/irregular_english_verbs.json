@@ -1,0 +1,102 @@
+{
+    "become": {
+        "PAST": "became",
+        "PERF": "become"
+    },
+    "bring": {
+        "PAST": "brought",
+        "PERF": "brought"
+    },
+    "do": {
+        "PAST": "did",
+        "PERF": "done"
+    },
+    "feel": {
+        "PAST": "felt",
+        "PERF": "felt"
+    },
+    "find": {
+        "PAST": "found",
+        "PERF": "found"
+    },
+    "get": {
+        "PAST": "got",
+        "PERF": "gotten"
+    },
+    "give": {
+        "PAST": "gave",
+        "PERF": "given"
+    },
+    "go": {
+        "PAST": "went",
+        "PERF": "gone"
+    },
+    "hold": {
+        "PAST": "held",
+        "PERF": "held"
+    },
+    "keep": {
+        "PAST": "kept",
+        "PERF": "kept"
+    },
+    "know": {
+        "PAST": "knew",
+        "PERF": "known"
+    },
+    "leave": {
+        "PAST": "left",
+        "PERF": "left"
+    },
+    "make": {
+        "PAST": "made",
+        "PERF": "made"
+    },
+    "mean": {
+        "PAST": "meant",
+        "PERF": "meant"
+    },
+    "put": {
+        "PAST": "put",
+        "PERF": "put"
+    },
+    "run": {
+        "PAST": "ran",
+        "PERF": "run"
+    },
+    "say": {
+        "PAST": "said",
+        "PERF": "said"
+    },
+    "see": {
+        "PASTT": "saw",
+        "PERF": "seen"
+    },
+    "set": {
+        "PASTT": "set",
+        "PERF": "set"
+    },
+    "sit": {
+        "PASTT": "sat",
+        "PERF": "sat"
+    },
+    "stand": {
+        "PASTT": "stood",
+        "PERF": "stood"
+    },
+    "take": {
+        "PASTT": "took",
+        "PERF": "taken"
+    },
+    "tell": {
+        "PASTT": "told",
+        "PERF": "told"
+    },
+    "think": {
+        "PASTT": "thought",
+        "PERF": "thought"
+    },
+    "write": {
+        "PASTT": "wrote",
+        "PERF": "written"
+    }
+}
