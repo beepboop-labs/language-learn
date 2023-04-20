@@ -70,7 +70,6 @@ class TestLogin:
         # Check response is bad request
         assert response.status_code == 400
 
-
 class TestRegister:
     # existing test user credentials
     # *********************
@@ -144,7 +143,7 @@ class TestUserActivity:
 
         # Check that the response contains the user token
         response_data = json.loads(response.data)
-        assert 'spanish' in response_data
+        assert 'username' in response_data
 
 
 class TestUserCompleteQuiz:
@@ -154,4 +153,11 @@ class TestUserCompleteQuiz:
             assert response.status_code == 200
 
 
+class TestQuiz:
 
+	def test_quiz(self, client):
+		data = {"length": 10, "unit": 1, "primaryLanguage": "english", "secondaryLanguage": "spanish"}
+		response = client.post('/quiz', data=json.dumps(data), content_type='application/json')
+
+		# Check that the response is successful
+		assert response.status_code == 200

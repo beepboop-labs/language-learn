@@ -1,0 +1,55 @@
+{
+    "be": {
+        "PAST": {
+            "1p": "were",
+            "1s": "was",
+            "2p": "were",
+            "2s": "were",
+            "3p": "were",
+            "3s": "was"
+        },
+        "PERF": {
+            "1p": "been",
+            "1s": "been",
+            "2p": "been",
+            "2s": "been",
+            "3p": "been",
+            "3s": "been"
+        },
+        "PRES": {
+            "1p": "are",
+            "1s": "am",
+            "2p": "are",
+            "2s": "are",
+            "3p": "are",
+            "3s": "is"
+        }
+    },
+
+    "have":{
+        "PAST": {
+            "1p": "had",
+            "1s": "had",
+            "2p": "had",
+            "2s": "had",
+            "3p": "had",
+            "3s": "had"
+        },
+        "PERF": {
+            "1p": "had",
+            "1s": "had",
+            "2p": "had",
+            "2s": "had",
+            "3p": "had",
+            "3s": "had"
+        },
+        "PRES": {
+            "1p": "have",
+            "1s": "have",
+            "2p": "have",
+            "2s": "have",
+            "3p": "have",
+            "3s": "has"
+        }
+    }
+}

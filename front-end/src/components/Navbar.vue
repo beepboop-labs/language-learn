@@ -1,6 +1,25 @@
 <script setup>
 import { ref, onMounted, watch} from 'vue';
 import { userToken } from '../user-token';
+<<<<<<< HEAD
+
+let username = ref(userToken.getUsername())
+// This is a built-in lifecycle hook from Vue
+onMounted(() => {
+  
+   username.value = userToken.getUsername()
+  
+    
+  });
+
+  watch(userToken, () => {
+  username.value = userToken.getUsername()
+})
+    
+    
+let showMobileMenu= ref(false);
+=======
+>>>>>>> 579cc42906ade52f75538ec5030e2ee8c9391bc1
 
 let username = ref(userToken.getUsername())
 // This is a built-in lifecycle hook from Vue
@@ -185,6 +204,11 @@ li {
     padding: 0 10px 10px 0;
   }
 
+<<<<<<< HEAD
+
+}
+</style>
+=======
   .dropdown {
     position: absolute;
     top: 30px;
@@ -196,6 +220,7 @@ li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     display: none;
   }
+>>>>>>> 579cc42906ade52f75538ec5030e2ee8c9391bc1
 
   .dropdown-content {
     display: flex;

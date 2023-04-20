@@ -1,17 +1,31 @@
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, watch, onMounted } from 'vue';
+
+ 
+const props = defineProps({
+  secondaryLanguage: {
+    type: String,
+    required: true
+  },
+  unit: {
+    type: Number,
+    required: true
+  }
+})
+
 
   // const fetch = require('node-fetch');
   const quizURL = "http://127.0.0.1:5000/quiz"
 
   let data
   let quizIndex = ref(0)
-  let englishWord  = ref("")
-  let spanishWord = ref("")
+  let primaryWord  = ref("")
+  let secondaryWord = ref("")
   let answerOptions = []
   let quizLength = 0
   let selectedAnswer = ref("")
   let message = ref("")
+
 
 
   function setAnswerOptions() {
@@ -19,7 +33,7 @@
     answerOptions = []
 
     // add the correct answer
-    answerOptions.push(data.words[quizIndex.value].spanish)
+    answerOptions.push(data.words[quizIndex.value].secondary)
     
     // add 3 random options that are not the correct answer
     let choice = quizIndex.value
@@ -27,11 +41,11 @@
     for(let i=0; i < 3; i++){
 
       // don't add words that are already in the array
-      while(answerOptions.includes(data.words[choice].spanish)) {
+      while(answerOptions.includes(data.words[choice].secondary)) {
         choice = Math.floor(Math.random() * data.words.length)
       }
 
-      answerOptions.push(data.words[choice].spanish)
+      answerOptions.push(data.words[choice].secondary)
     }
 
     // scramble the answer options so the correct answer isnt
@@ -40,7 +54,7 @@
   }
 
   function isCorrectAnswer(){
-    return  selectedAnswer.value == data.words[quizIndex.value].spanish
+    return  selectedAnswer.value == data.words[quizIndex.value].secondary
   }
 
   function isLastQuestion() {
@@ -51,8 +65,8 @@
 
     quizIndex.value +=1
 
-    englishWord.value  = data.words[quizIndex.value].english
-    spanishWord.value = data.words[quizIndex.value].spanish
+    primaryWord.value  = data.words[quizIndex.value].primary
+    secondaryWord.value = data.words[quizIndex.value].secondary
 
     //reset the quiz options
     setAnswerOptions()
@@ -82,9 +96,9 @@
   }
 
   function initializeQuiz() {
-    //POST request options
-    const options = {}
-
+    //POST request options 
+    const options = {"primaryLanguage": "english", secondaryLanguage: props.secondaryLanguage, "unit": props.unit, "length": 10}
+    console.log(options)
     // Fetch the quiz data from the API
     fetch(quizURL, {
       method: 'POST',
@@ -93,9 +107,11 @@
     }).then(res => res.json())
       .then(json => {
         data = json;
+
+        console.log(json)
         
-        englishWord.value = data.words[quizIndex.value].english;
-        spanishWord.value = data.words[quizIndex.value].spanish;
+        primaryWord.value = data.words[quizIndex.value].primary;
+        secondaryWord.value = data.words[quizIndex.value].secondary;
         quizLength = data.words.length;
 
         setAnswerOptions()
@@ -108,7 +124,9 @@
   // This is a built-in lifecycle hook from Vue
   onMounted(() => {
     console.log("Quiz mounted");
-    initializeQuiz()
+    // console.log($route.params.langauge)
+    // console.log($route.params.unit)
+    initializeQuiz(props.language, props.unit)
   });
  
   
@@ -123,7 +141,7 @@
     <div class = "progress">{{ quizIndex + 1 }}/{{ quizLength }}</div>
     <div class = "question">
         <span class = "prompt">How do you say </span>
-        <span class = "keyword">"{{englishWord}}"</span>
+        <span class = "keyword">"{{primaryWord}}"</span>
     </div>
     <div class = "options">
         <div v-for="option in answerOptions">
