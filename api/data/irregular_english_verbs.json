@@ -7,17 +7,33 @@
         "PAST": "brought",
         "PERF": "brought"
     },
+    "come": {
+        "PAST": "came",
+        "PERF": "come"
+    },
     "do": {
         "PAST": "did",
         "PERF": "done"
+    },
+    "eat": {
+        "PAST": "ate",
+        "PERF": "eaten"
     },
     "feel": {
         "PAST": "felt",
         "PERF": "felt"
     },
+    "fall": {
+        "PAST": "fell",
+        "PERF": "fallen"
+    },
     "find": {
         "PAST": "found",
         "PERF": "found"
+    },
+    "forget": {
+        "PAST": "forgot",
+        "PERF": "forgotten"
     },
     "get": {
         "PAST": "got",
@@ -30,6 +46,10 @@
     "go": {
         "PAST": "went",
         "PERF": "gone"
+    },
+    "hear": {
+        "PAST": "heard",
+        "PERF": "heard"
     },
     "hold": {
         "PAST": "held",
@@ -47,6 +67,10 @@
         "PAST": "left",
         "PERF": "left"
     },
+    "lose": {
+        "PAST": "lost",
+        "PERF": "lost"
+    },
     "make": {
         "PAST": "made",
         "PERF": "made"
@@ -55,9 +79,17 @@
         "PAST": "meant",
         "PERF": "meant"
     },
+    "mistake": {
+        "PAST": "mistook",
+        "PERF": "mistaken"
+    },
     "put": {
         "PAST": "put",
         "PERF": "put"
+    },
+    "read": {
+        "PAST": "read",
+        "PERF": "read"
     },
     "run": {
         "PAST": "ran",
@@ -68,35 +100,51 @@
         "PERF": "said"
     },
     "see": {
-        "PASTT": "saw",
+        "PAST": "saw",
         "PERF": "seen"
     },
     "set": {
-        "PASTT": "set",
+        "PAST": "set",
         "PERF": "set"
     },
     "sit": {
-        "PASTT": "sat",
+        "PAST": "sat",
         "PERF": "sat"
     },
+    "sleep": {
+        "PAST": "slept",
+        "PERF": "slept"
+    },
+    "speak": {
+        "PAST": "spoke",
+        "PERF": "spoken"
+    },
     "stand": {
-        "PASTT": "stood",
+        "PAST": "stood",
         "PERF": "stood"
     },
     "take": {
-        "PASTT": "took",
+        "PAST": "took",
         "PERF": "taken"
     },
     "tell": {
-        "PASTT": "told",
+        "PAST": "told",
         "PERF": "told"
     },
     "think": {
-        "PASTT": "thought",
+        "PAST": "thought",
         "PERF": "thought"
     },
+    "understand": {
+        "PAST": "understood",
+        "PERF": "understood"
+    },
+    "wear": {
+        "PAST": "wore",
+        "PERF": "worn"
+    },
     "write": {
-        "PASTT": "wrote",
+        "PAST": "wrote",
         "PERF": "written"
     }
 }

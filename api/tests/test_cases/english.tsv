@@ -48,10 +48,8 @@ NEG+1s+PRES+speak	I do not speak
 NEG+1s+PRES+understand	I do not understand
 2s+PERF+understand	you have understood
 1s+PAST+speak	I spoke
-1p+PRES+ask	we request
 2s+IMP+write	write
 2s+PRES+praise	you praise
-2s+IMP+make sure	confirm
 1s+PAST+read	I read
 3p+PERF+live	they have lived
 1p+PRES+live	we live
@@ -59,8 +57,6 @@ NEG+1p+PRES+live	we do not live
 1p+PRES+stay	we stay
 NEG+1p+PRES+stay	we do not stay
 NEG+1s+FUT+die	I will not die
-2s+PERF+be born	you have been born
-1s+PERF+be born	I have been born
 1p+FUT+pay	we will pay
 1s+FUT+get	I will get
 1s+PAST+get	I got
@@ -94,7 +90,6 @@ NEG+1s+FUT+die	I will not die
 2s+IMP+cut	cut
 1p+FUT+fix	we will fix
 1s+PAST+lose	I lost
-1s+PRES+look for	I look
 NEG+1s+PRES+know	I do not know
 2s+PRES+know	you know
 1s+PRES+remember	I remember
@@ -109,8 +104,6 @@ NEG+1s+PRES+forget	I do not forget
 1s+PERF+mistake	I have mistaken
 1s+PAST+think	I thought
 2s+PRES+think	you think
-2s+PRES+like	you love
-NEG+1s+PRES+like	I do not love
 1s+PRES+prefer	I prefer
 1s+PRES+hate	I hate
 2s+PRES+listen	you listen
@@ -125,8 +118,6 @@ NEG+1s+PAST+listen	I did not listen
 1p+PRES+order	we order
 1s+PRES+hope	I hope
 3p+PRES+hope	they hope
-2s+PRES+depend	you plan
-1p+PRES+depend	we plan
 1p+FUT+be late	we will be late
 1s+PRES+watch	I watch
 1s+PAST+think	I thought
@@ -154,7 +145,7 @@ NEG+2s+PRES+need	you do not need
 2s+IMP+sing	sing
 2p+IMP+laugh	laugh
 2s+PRES+laugh	you laugh
-2p+PRES+play	ye play
+2p+PRES+play	you play
 2s+PERF+enjoy	you have enjoyed
 1p+PAST+enjoy	we enjoyed
 2s+IMP+cross	cross
@@ -168,18 +159,17 @@ NEG+2s+PRES+need	you do not need
 3p+PRES+plan	they plan
 1p+PRES+plan	we plan
 3p+PRES+build	they build
-1s+PAST+startle	I was startled
 3p+FUT+visit	they will visit
 1s+PRES+visit	I visit
 3p+FUT+close	they will close
 3s+PRES+cry	(s)he cries
 3p+FUT+steal	they will steal
 NEG+1s+PRES+believe	I do not believe
-3s+PERF+think	I will think
+3s+PERF+think	(s)he has thought
 1s+PERF+lose	I have lost
 1s+PAST+leave	I left
 1s+PRES+approach	I approach
-1p+PRES+appraoch	we approach
+1p+PRES+approach	we approach
 3s+PRES+approach	(s)he approaches
 1s+PAST+fall	I fell
 NEG+3p+PRES+allow	they do not allow

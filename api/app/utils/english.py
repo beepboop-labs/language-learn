@@ -107,17 +107,17 @@ def conjugate_english(verbString):
                 if root.endswith('e'):
                     phrase = root + 'd'
                 elif root.endswith('y'):
-                    if root[-1] in consonants:
+                    if root[-2] in consonants:
                         phrase = root[:-1] + 'ied'
-                    elif root[-1] in vowels:
+                    elif root[-2] in vowels:
                         phrase = root + 'ed'
 
                 # This works for 1 syllable words but
                 # the rules are more complex for 2 syllable words
-                elif (root[-3] in consonants and
-                        root[-2] in vowels and
-                        root[-1] in consonants):
-                    phrase = root + root[-1] + 'ed'            
+                # elif (root[-3] in consonants and
+                #         root[-2] in vowels and
+                #         root[-1] in consonants):
+                #     phrase = root + root[-1] + 'ed'            
                 else:
                     phrase = root + 'ed'
             
@@ -165,8 +165,11 @@ def conjugate_english(verbString):
                     phrase = phrase + 'es'
                 elif phrase[-2] in consonants and phrase.endswith('y') and subject == '3s':
                     phrase = phrase[:-1] + 'ies'
-                else:
+                elif subject == '3s':
                     phrase = phrase + 's'
+                else:
+                    phrase = phrase
+
             phrase = pronouns[subject] + ' ' + phrase
         else:
             phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
@@ -188,25 +191,27 @@ def conjugate_english(verbString):
                 if phrase.endswith('e'):
                     phrase = root + 'd'
                 elif phrase.endswith('y'):
-                    if phrase[-1] in consonants:
+                    if phrase[-2] in consonants:
                         phrase = phrase[:-1] + 'ied'
-                    elif phrase[-1] in vowels:
+                    elif phrase[-2] in vowels:
                         phrase = phrase + 'ed'
 
                 # This works for 1 syllable words but
                 # the rules are more complex for 2 syllable words
-                elif (phrase[-3] in consonants and
-                        phrase[-2] in vowels and
-                        phrase[-1] in consonants):
-                    phrase = phrase + phrase[-1] + 'ed'            
+                # elif (phrase[-3] in consonants and
+                #         phrase[-2] in vowels and
+                #         phrase[-1] in consonants):
+                #     phrase = phrase + phrase[-1] + 'ed'            
                 else:
                     phrase = phrase + 'ed'
             
             phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' ' + phrase
 
         else:
-            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
-
+            if irregular:
+                phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
+            else:
+                phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase + 'ed'
        
         return phrase
         
