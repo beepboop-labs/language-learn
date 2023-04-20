@@ -131,6 +131,7 @@ class TestRegister:
         # Check response is bad request
         assert response.status_code == 400
 
+<<<<<<< HEAD
 class TestQuiz:
 
 	def test_quiz(self, client):
@@ -140,6 +141,8 @@ class TestQuiz:
 		# Check that the response is successful
 		assert response.status_code == 200
                 
+=======
+>>>>>>> 579cc42906ade52f75538ec5030e2ee8c9391bc1
 class TestUserActivity:
 
     def test_success(self, client):

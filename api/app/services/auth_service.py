@@ -32,9 +32,6 @@ def register_user(userdata):
             spanish = Language.query.filter_by(name='spanish').first()
             swahili = Language.query.filter_by(name='swahili').first()
 
-            print(spanish)
-            print(swahili)
-
             new_user = User(username=username, password=password)
 
             spanish_activity = Activity(language_id=spanish.id, user=new_user)
