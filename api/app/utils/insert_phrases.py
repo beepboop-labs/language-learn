@@ -26,11 +26,13 @@ def insert_phrases_from_tsv(filename, app=None):
     with app.app_context(): 
         # Create the languages if they do not exist in the database
         primary_lang = Language.query.filter_by(name=header[0].lower()).first()
+        print(primary_lang)
         if not primary_lang:
             primary_lang = Language(name=header[0].lower())
             db.session.add(primary_lang)
             
         secondary_lang = Language.query.filter_by(name=header[1].lower()).first()
+        print(secondary_lang)
         if not secondary_lang:
             secondary_lang = Language(name=header[1].lower())
             db.session.add(secondary_lang)
