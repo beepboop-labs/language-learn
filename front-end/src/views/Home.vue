@@ -93,16 +93,9 @@ function getActivity(){
   <!-- <div>{{ activity.spanish.unit1.q1 }}</div> -->
   <div id="roadmap" v-if="loggedin">
     <h1>SPANISH</h1>
-<<<<<<< HEAD
     <h2>Unit 1</h2>
-=======
-    <h2>Unit 1 (present, preterite, imperfect)</h2>
->>>>>>> 579cc42906ade52f75538ec5030e2ee8c9391bc1
-    <p></p>
-    <ul>
-      
+    <ul> 
       <li>
-<<<<<<< HEAD
         <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 1}}">Multiple Choice</router-link>
         <span v-if="activity.spanish.unit1.q1">  -->Completed!</span>
       </li>
@@ -146,51 +139,6 @@ function getActivity(){
       <li>
         <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 3}}">True or False</router-link>
         <span v-if="activity.spanish.unit3.q3">  -->Completed!</span>
-=======
-        <span>Multiple Choice Quiz</span>
-        <span v-if="activity.spanish.unit1.q1">  -->Completed</span>
-      </li>
-      <li>
-        <span>Blank Quiz</span>
-        <span v-if="activity.spanish.unit1.q2">  -->Completed</span>
-      </li>
-      <li>
-        <span>True/False</span>
-        <span v-if="activity.spanish.unit1.q3">  -->Completed</span>
-      </li>
-    </ul>
-    <h2>Unit 2 (past)</h2>
-    <p></p>
-    <ul>
-      <li>
-        <span>Multiple Choice Quiz</span>
-        <span v-if="activity.spanish.unit2.q1">  -->Completed</span>
-      </li>
-      <li>
-        <span>Blank Quiz</span>
-        <span v-if="activity.spanish.unit2.q2">  -->Completed</span>
-      </li>
-      <li>
-        <span>True/False</span>
-        <span v-if="activity.spanish.unit2.q3">  -->Completed</span>
-      </li>
-      
-    </ul>
-    <h2>Unit 3 (Conditional, Future)</h2>
-    <p></p>
-    <ul>
-      <li>
-        <span>Multiple Choice Quiz</span>
-        <span v-if="activity.spanish.unit3.q1">  -->Completed</span>
-      </li>
-      <li>
-        <span>Blank Quiz</span>
-        <span v-if="activity.spanish.unit3.q2">  -->Completed</span>
-      </li>
-      <li>
-        <span>True/False</span>
-        <span v-if="activity.spanish.unit3.q3">  -->Completed</span>
->>>>>>> 579cc42906ade52f75538ec5030e2ee8c9391bc1
       </li>
     </ul>
   </div>
