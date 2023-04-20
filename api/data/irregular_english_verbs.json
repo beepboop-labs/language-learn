@@ -1,0 +1,150 @@
+{
+    "become": {
+        "PAST": "became",
+        "PERF": "become"
+    },
+    "bring": {
+        "PAST": "brought",
+        "PERF": "brought"
+    },
+    "come": {
+        "PAST": "came",
+        "PERF": "come"
+    },
+    "do": {
+        "PAST": "did",
+        "PERF": "done"
+    },
+    "eat": {
+        "PAST": "ate",
+        "PERF": "eaten"
+    },
+    "feel": {
+        "PAST": "felt",
+        "PERF": "felt"
+    },
+    "fall": {
+        "PAST": "fell",
+        "PERF": "fallen"
+    },
+    "find": {
+        "PAST": "found",
+        "PERF": "found"
+    },
+    "forget": {
+        "PAST": "forgot",
+        "PERF": "forgotten"
+    },
+    "get": {
+        "PAST": "got",
+        "PERF": "gotten"
+    },
+    "give": {
+        "PAST": "gave",
+        "PERF": "given"
+    },
+    "go": {
+        "PAST": "went",
+        "PERF": "gone"
+    },
+    "hear": {
+        "PAST": "heard",
+        "PERF": "heard"
+    },
+    "hold": {
+        "PAST": "held",
+        "PERF": "held"
+    },
+    "keep": {
+        "PAST": "kept",
+        "PERF": "kept"
+    },
+    "know": {
+        "PAST": "knew",
+        "PERF": "known"
+    },
+    "leave": {
+        "PAST": "left",
+        "PERF": "left"
+    },
+    "lose": {
+        "PAST": "lost",
+        "PERF": "lost"
+    },
+    "make": {
+        "PAST": "made",
+        "PERF": "made"
+    },
+    "mean": {
+        "PAST": "meant",
+        "PERF": "meant"
+    },
+    "mistake": {
+        "PAST": "mistook",
+        "PERF": "mistaken"
+    },
+    "put": {
+        "PAST": "put",
+        "PERF": "put"
+    },
+    "read": {
+        "PAST": "read",
+        "PERF": "read"
+    },
+    "run": {
+        "PAST": "ran",
+        "PERF": "run"
+    },
+    "say": {
+        "PAST": "said",
+        "PERF": "said"
+    },
+    "see": {
+        "PAST": "saw",
+        "PERF": "seen"
+    },
+    "set": {
+        "PAST": "set",
+        "PERF": "set"
+    },
+    "sit": {
+        "PAST": "sat",
+        "PERF": "sat"
+    },
+    "sleep": {
+        "PAST": "slept",
+        "PERF": "slept"
+    },
+    "speak": {
+        "PAST": "spoke",
+        "PERF": "spoken"
+    },
+    "stand": {
+        "PAST": "stood",
+        "PERF": "stood"
+    },
+    "take": {
+        "PAST": "took",
+        "PERF": "taken"
+    },
+    "tell": {
+        "PAST": "told",
+        "PERF": "told"
+    },
+    "think": {
+        "PAST": "thought",
+        "PERF": "thought"
+    },
+    "understand": {
+        "PAST": "understood",
+        "PERF": "understood"
+    },
+    "wear": {
+        "PAST": "wore",
+        "PERF": "worn"
+    },
+    "write": {
+        "PAST": "wrote",
+        "PERF": "written"
+    }
+}

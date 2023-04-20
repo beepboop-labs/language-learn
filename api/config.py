@@ -30,3 +30,11 @@ class Development(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # DATABASE_URI = environ.get('PROD_DATABASE_URI')
+
+class Testing(Config):
+    FLASK_ENV = 'testing'
+    DEBUG = True
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + path.join(basedir, 'test.db')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    # DATABASE_URI = environ.get('PROD_DATABASE_URI')
