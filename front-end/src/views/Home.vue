@@ -53,8 +53,15 @@ onMounted(() => {
   loggedin.value = userToken.getLoggedIn()
 })
 
+function setLanguage(lang){
+  userToken.language = lang
+  console.log(lang)
+  console.log(userToken.language)
+
+}
 function getActivity(){
   const options = { 
+      language: userToken.language,
       username: userToken.getUsername(),   
     }
 
@@ -92,19 +99,21 @@ function getActivity(){
   </div> -->
   <!-- <div>{{ activity.spanish.unit1.q1 }}</div> -->
   <div id="roadmap" v-if="loggedin">
-    <h1>SPANISH</h1>
+    <button type="button" @click="setLanguage('spanish')">Spanish</button>
+    <button type="button" @click="setLanguage('swahili')">Swahili</button>
+    <h1>{{ userToken.language }}</h1>
     <h2>Unit 1</h2>
     <ul> 
       <li>
-        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 1}}">Multiple Choice</router-link>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 1}}">Multiple Choice</router-link>
         <span v-if="activity.spanish.unit1.q1">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: 'spanish', unit: 1}}">Fill in the Blank</router-link>
+        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: userToken.language, unit: 1}}">Fill in the Blank</router-link>
         <span v-if="activity.spanish.unit1.q2">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 1}}">True or False</router-link>
+        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: userToken.language, unit: 1}}">True or False</router-link>
         <span v-if="activity.spanish.unit1.q3">  -->Completed!</span>
       </li>
     </ul>
@@ -112,15 +121,15 @@ function getActivity(){
     <p></p>
     <ul>
       <li>
-        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 2}}">Multiple Choice</router-link>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 2}}">Multiple Choice</router-link>
         <span v-if="activity.spanish.unit2.q1">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: 'spanish', unit: 2}}">Fill in the Blank</router-link>
+        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: userToken.language, unit: 2}}">Fill in the Blank</router-link>
         <span v-if="activity.spanish.unit2.q2">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 2}}">True or False</router-link>
+        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: userToken.language, unit: 2}}">True or False</router-link>
         <span v-if="activity.spanish.unit2.q3">  -->Completed!</span>
       </li>
       
@@ -129,15 +138,15 @@ function getActivity(){
     <p></p>
     <ul>
       <li>
-        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 3}}">Multiple Choice</router-link>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 3}}">Multiple Choice</router-link>
         <span v-if="activity.spanish.unit3.q1">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: 'spanish', unit: 3}}">Fill in the Blank</router-link>
+        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: userToken.language, unit: 3}}">Fill in the Blank</router-link>
         <span v-if="activity.spanish.unit3.q2">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 3}}">True or False</router-link>
+        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: userToken.language, unit: 3}}">True or False</router-link>
         <span v-if="activity.spanish.unit3.q3">  -->Completed!</span>
       </li>
     </ul>

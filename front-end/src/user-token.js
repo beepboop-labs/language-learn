@@ -4,6 +4,7 @@ export const userToken = reactive({
   userId: null,
   username: null,
   loggedin: false,
+  language: "spanish",
    
   setUser(userId, username) {
     console.log(userId)

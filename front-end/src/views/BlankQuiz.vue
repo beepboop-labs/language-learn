@@ -1,5 +1,8 @@
 <script setup>
   import { ref, onMounted } from 'vue'
+  import { useRouter, useRoute } from 'vue-router'
+
+  const router = useRouter();
 
   const props = defineProps({
   secondaryLanguage: {
@@ -73,6 +76,7 @@
 
   function completeQuiz() {
     message.value = "Congratulations, you finished the quiz!"
+    router.push("/")  
  }
 
   function isLastQuestion() {
