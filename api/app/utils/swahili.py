@@ -1,4 +1,6 @@
 import json
+import re
+from app.utils.parse_verb_string import parse_verb_string
 
 f = open('data/irregular_swahili_verbs.json')
 irregular_verbs = json.load(f)
@@ -6,24 +8,19 @@ irregular_verbs = json.load(f)
 f = open('data/very_irregular_swahili_verbs.json')
 very_irregular_verbs = json.load(f)
 
-vowels = ['a', 'e', 'i', 'o', 'u']
-
 subject_prefix = {
     '1p': 'tu',
     '2p': 'm',
     '3p': 'wa',
     '1s': 'ni',
     '2s': 'u',
-    '3s': 'a'
-}
-
-subject_prefix_negative = {
-    '1p': 'hatu',
-    '2p': 'ham',
-    '3p': 'hawa',
-    '1s': 'si',
-    '2s': 'hu',
-    '3s': 'ha'
+    '3s': 'a',
+    'NEG1p': 'hatu',
+    'NEG2p': 'ham',
+    'NEG3p': 'hawa',
+    'NEG1s': 'si',
+    'NEG2s': 'hu',
+    'NEG3s': 'ha'
 }
 
 tense_marker = {
@@ -31,102 +28,55 @@ tense_marker = {
     'PAST': 'li',
     'FUT': 'ta',
     'PRES': 'na',
-    'PERF': 'me'
+    'PERF': 'me',
+    'NEGIMP': 'si',
+    'NEGPAST': 'ku',
+    'NEGFUT': 'ta',
+    'NEGPRES': 'ha',
+    'NEGPERF': 'ja'
 }
-
-tense_marker_negative = {
-    'IMP': 'si',
-    'PAST': 'ku',
-    'FUT': 'ta',
-    'PRES': 'ha',
-    'PERF': 'ja'
-}
-
-
-def parse_string(s):
-    parts = s.split('+')
-    if len(parts) == 4:
-        negative, subject, tense, root = parts
-    elif len(parts) == 3:
-        subject, tense, root = parts
-        negative = False
-    else:
-        raise ValueError('Invalid string format')
-    
-    if negative == 'NEG':
-        negative = True
-    else:
-        negative = False
-    
-    # Check if root is a compound verb: Kuwa na
-    compound_verb = ""
-    if " " in root:
-        compound_verb = " " + root.split(" ")[1]
-        root = root.split(" ")[0]
-
-    return negative, subject, tense, root, compound_verb
 
 def check_irregular(str, tense, negative):
-    # verbs that are irregular within a tense.
     if str in very_irregular_verbs:
         if tense in very_irregular_verbs[str]:
             return very_irregular_verbs[str][tense]
         else:
-            print("tense not found in very_irregular_verbs")
             return False
-    # monosyllabic verbs keep the ku- prefix in these cases
+    # monosyllabic verbs are irregular in these cases:
     elif str in irregular_verbs and (not negative or (negative and tense == 'FUT')):
         return irregular_verbs[str] 
     else:
         return False
 
 def conjugate_swahili(verbString):
-    # negative: True, False
-    # root: ku + verb
-    # subject: 1p, 2p, 3p, 1s, 2s, 3s
-    # tense: IMP, PAST, FUT, PRES, PERF
 
-    negative, subject, tense, root, compound_verb = parse_string(verbString)
-
-    # Remove 'ku' from root
-    phrase = root[2:]
-
-    # Check if verb is irregular
-    irregular = check_irregular(root + compound_verb, tense, negative)
-    if irregular:
-        phrase = irregular
+    negative, subject, tense, root, compound_verb = parse_verb_string(verbString)
 
     if tense not in tense_marker:
-        raise ValueError('Invalid tense')        
+        raise ValueError('Invalid tense')
+    if subject not in subject_prefix:
+        raise ValueError('Invalid subject')
+
+    # Check if verb is irregular, else remove 'ku' from root
+    irregular = check_irregular(root + compound_verb, tense, negative)
+    phrase = irregular if irregular else root[2:]   
     
-    #TODO: write negative imperative?
     if tense == 'IMP':
         if subject.endswith('p'):   # plural
-            if phrase[-1] == 'a':
-                phrase = phrase[:-1] + 'e'
-            phrase = phrase + 'ni'
-            return phrase
+            return re.sub(r'a$', 'e', phrase) + "ni"
         return phrase
     
-    # specific case for kuwa na: No present tense marker
-    if tense == 'PRES' and phrase == 'na':
-        if negative:
-            return subject_prefix_negative[subject] + phrase
-        return subject_prefix[subject] + phrase
+    if tense == 'PRES':
+        # special case for 'kuwa na': No present tense marker
+        if root + compound_verb == 'kuwa na':
+            return subject_prefix[negative + subject] + phrase
     
-    # specific case for kuwa: No present tense marker or subject prefix
-    if tense == 'PRES' and phrase == 'ni':
-        if negative:
-            return "si"
-        return phrase
+        # special case for 'kuwa': No present tense marker or subject prefix
+        if root == 'kuwa':
+            return "si" if negative else phrase
     
-    if tense == 'PRES' and negative:
-        if phrase[-1] == 'a':
-            phrase = phrase[:-1] + 'i'
-        return subject_prefix_negative[subject] + phrase
+        if negative:
+            return subject_prefix[negative + subject] + re.sub(r'a$', 'i', phrase)
 
     # no special cases
-    if negative:
-        return subject_prefix_negative[subject] + tense_marker_negative[tense] + phrase + compound_verb
-    
-    return subject_prefix[subject] + tense_marker[tense] + phrase + compound_verb
+    return subject_prefix[negative + subject] + tense_marker[negative + tense] + phrase + compound_verb
