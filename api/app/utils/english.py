@@ -1,5 +1,6 @@
 import json
 import re
+import syllables
 from app.utils.parse_verb_string import parse_verb_string
 
 f = open('data/irregular_english_verbs.json')
@@ -48,6 +49,9 @@ def conjugate_english(verbString):
     irregular = check_irregular(root, tense, subject)
     phrase = irregular if irregular else root 
 
+    syl = syllables.estimate(phrase)
+    print(syl)
+
     if tense == 'IMP':
         return phrase + compound_verb
     
@@ -59,6 +63,14 @@ def conjugate_english(verbString):
             phrase = re.sub(r'e$', 'ed', phrase)
             if re.search(r'[^aeiou]y$', phrase):
                 phrase = re.sub(r'y$', 'ied', phrase)
+            # the twinning rule, eg. skim -> skimmed
+            # 1)ends in a vowel + consonant
+            # 2)is monosyllabic
+            # 3)is not a verb ending in w, x, or y
+            # 4)only has one vowel 
+            if re.search(r'^[^aeiou]+[aeiou][^aeiou]$', phrase) and syl == 1 and not phrase.endswith(('w', 'x', 'y')):
+                phrase += phrase[-1] + 'ed'
+                
             phrase += 'ed' if not phrase.endswith('ed') else ''
 
         if negative:
@@ -117,6 +129,10 @@ def conjugate_english(verbString):
             phrase = re.sub(r'e$', 'ed', phrase)
             if re.search(r'[^aeiou]y$', phrase):
                 phrase = re.sub(r'y$', 'ied', phrase)
+            # the twinning rule, eg. plan -> planned
+            if re.search(r'^[^aeiou]+[aeiou][^aeiou]$', phrase) and syl == 1 and not phrase.endswith(('w', 'x', 'y')):
+                phrase += phrase[-1] + 'ed'
+
             phrase += 'ed' if not phrase.endswith('ed') else ''
 
         if negative:
