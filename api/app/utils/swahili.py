@@ -108,22 +108,22 @@ def conjugate_swahili(verbString):
             return phrase
         return phrase
     
-    if tense == 'PRES' and negative:
-        if phrase != 'na': # kuwa na is the only verb that doesn't change in the negative
-            if phrase[-1] == 'a':
-                phrase = phrase[:-1] + 'i'
-        phrase = subject_prefix_negative[subject] + phrase
-        return phrase
-    
     # specific case for kuwa na: No present tense marker
     if tense == 'PRES' and phrase == 'na':
-        phrase = subject_prefix[subject] + phrase
-        return phrase
+        if negative:
+            return subject_prefix_negative[subject] + phrase
+        return subject_prefix[subject] + phrase
     
     # specific case for kuwa: No present tense marker or subject prefix
     if tense == 'PRES' and phrase == 'ni':
+        if negative:
+            return "si"
         return phrase
     
+    if tense == 'PRES' and negative:
+        if phrase[-1] == 'a':
+            phrase = phrase[:-1] + 'i'
+        return subject_prefix_negative[subject] + phrase
 
     # no special cases
     if negative:
