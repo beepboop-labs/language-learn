@@ -1,0 +1,31 @@
+{   "kuwa": {
+        "IMP": "kuwa",
+        "PRES": "ni",
+        "PAST": "kuwa",
+        "FUT": "kuwa",
+        "PERF": "kuwa"
+    },
+    "kuwa na": {
+        "IMP": "kuwa",
+        "PRES": "na",
+        "PAST": "kuwa",
+        "FUT": "kuwa",
+        "PERF": "kuwa"
+    },
+    "kuja": {
+        "IMP": "njoo",
+        "PRES": "kuja",
+        "PAST": "kuja",
+        "FUT": "kuja",
+        "PERF": "kuja"
+    },
+    "kuenenda": {
+        "IMP": "nenda"
+    },
+    "kuleta": {
+        "IMP": "lete"
+    },
+    "kujifunza": {
+        "IMP": "jifunze"
+    }
+}
