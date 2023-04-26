@@ -47,6 +47,10 @@
         "PAST": "went",
         "PERF": "gone"
     },
+    "grow": {
+        "PAST": "grew",
+        "PERF": "grown"
+    },
     "hear": {
         "PAST": "heard",
         "PERF": "heard"

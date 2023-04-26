@@ -22,7 +22,6 @@ vowels = ['a', 'e', 'i', 'o', 'u']
 def check_irregular(str, tense, subj):
     
     if str in very_irregular_verbs:
-        print("VERY IRREGULAR VERB DETECTED")
         print(str, tense, subj)
         if tense in very_irregular_verbs[str]:
             if subj in very_irregular_verbs[str][tense]:
@@ -34,7 +33,6 @@ def check_irregular(str, tense, subj):
             print("Tense not found. Check irregular verbs!")
             return False
     elif str in irregular_verbs:
-        print("IRREGULAR VERB DETECTED")
         print(str, tense, subj)
         if tense in irregular_verbs[str]:
             return irregular_verbs[str][tense]
@@ -58,16 +56,21 @@ def parse_string(s):
         negative = True
     else:
         negative = False
+
+    # Check if root is a compound verb: "be happy", "take care of"
+    compound_verb = ""
+    if " " in root:
+        compound_verb =" " + root.split(" ", 1)[1]
+        root = root.split(" ", 1)[0]
     
-    return negative, subject, tense, root
+    return negative, subject, tense, root, compound_verb
     
 
 def conjugate_english(verbString):
     # negative: True, False
     # subject: 1p, 2p, 3p, 1s, 2s, 3s
     # tense: IMP, PAS, FUT, PRES, PERF
-
-    negative, subject, tense, root = parse_string(verbString)
+    negative, subject, tense, root, compound_verb = parse_string(verbString)
 
     phrase = root
 
@@ -78,18 +81,12 @@ def conjugate_english(verbString):
 
 
     if tense == 'IMP':
-        return phrase
+        return phrase + compound_verb
     
     if tense == 'PAST':
         # NOTES:
 
-        # "to be <verb>" form phrases are irregular and dont work yet
-        # 1p+PAST+kufurahi	we were happy
-        # 1s+PAST+kushtuka	I was shocked
-
         # Issue with double-consonant ending past conjugation noted below eg. dragged, hugged, planned
-
-        # need to check for past tenst ends in 't' like 'slept'
 
         helping_verbs = {
             '1p': 'did',
@@ -121,14 +118,13 @@ def conjugate_english(verbString):
                 else:
                     phrase = root + 'ed'
             
+            # irregular past tense has its own endings
             phrase = pronouns[subject] + ' ' + phrase
 
-        # negative past tense gets helping verb
-        #takes root instead of past tense for negative. For irregulars
         else:
             phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + root 
-            
-        return phrase
+        return phrase + compound_verb
+    
     
     if tense == 'FUT':
         helping_verbs = {
@@ -145,7 +141,7 @@ def conjugate_english(verbString):
         else:
             phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
         
-        return phrase
+        return phrase + compound_verb
     
     if tense == 'PRES':
         es_suffix = ('ss', 'x', 'ch', 'sh', 'o', 'z')
@@ -171,10 +167,14 @@ def conjugate_english(verbString):
                     phrase = phrase
 
             phrase = pronouns[subject] + ' ' + phrase
+        
+        # negative present tense 'to be' inverts negation word order
+        elif root == 'be':
+            phrase = pronouns[subject] + ' ' + phrase + ' not'
         else:
             phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
 
-        return phrase
+        return phrase + compound_verb
     
     if tense == 'PERF':
         helping_verbs = {
@@ -187,6 +187,7 @@ def conjugate_english(verbString):
         }
 
         if negative == False:
+            # Phrases with irregular past participles will have unique endings
             if irregular == False:
                 if phrase.endswith('e'):
                     phrase = root + 'd'
@@ -208,12 +209,13 @@ def conjugate_english(verbString):
             phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' ' + phrase
 
         else:
+            # Phrases with irregular past participles will have unique endings
             if irregular:
                 phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
             else:
                 phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase + 'ed'
        
-        return phrase
+        return phrase + compound_verb
         
     
     else:

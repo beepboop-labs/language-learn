@@ -99,7 +99,7 @@ def conjugate_swahili(verbString):
     if tense not in tense_marker:
         raise ValueError('Invalid tense')        
     
-    #TODO: write negative imperative
+    #TODO: write negative imperative?
     if tense == 'IMP':
         if subject.endswith('p'):   # plural
             if phrase[-1] == 'a':
