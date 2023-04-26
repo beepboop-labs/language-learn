@@ -233,3 +233,7 @@ NEG+3p+PRES+allow	they do not allow
 3s+PERF+cry	(s)he has cried
 1p+PAST+plan	we planned
 2s+PERF+drag	you have dragged
+2s+PERF+commit	you have committed
+NEG+1p+PAST+submit	we did not submit
+1s+PAST+submit	I submitted
+NEG+3s+PERF+transfer	(s)he has not transferred
