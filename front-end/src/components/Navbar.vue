@@ -38,15 +38,6 @@ function toggleProfileMenu() {
                     <li>
                         <router-link to="/register">Register</router-link>
                     </li>
-                    <li>
-                        <router-link to="/multiple-choice">Multiple Choice Quiz</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/blankquiz">BlankQuiz</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/truefalse">TrueFalse</router-link>
-                    </li>
                 </ul>
             <div v-if="!username" class="login-button">
                 <router-link to="/login">Login</router-link>
