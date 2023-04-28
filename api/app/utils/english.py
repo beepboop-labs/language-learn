@@ -1,4 +1,7 @@
 import json
+import re
+import syllables
+from app.utils.parse_verb_string import parse_verb_string
 
 f = open('data/irregular_english_verbs.json')
 irregular_verbs = json.load(f)
@@ -15,138 +18,73 @@ pronouns = {
     '3s': '(s)he'
 }
 
-consonants = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z']
-
-vowels = ['a', 'e', 'i', 'o', 'u']
-
 def check_irregular(str, tense, subj):
     
     if str in very_irregular_verbs:
-        print("VERY IRREGULAR VERB DETECTED")
         print(str, tense, subj)
         if tense in very_irregular_verbs[str]:
             if subj in very_irregular_verbs[str][tense]:
                 return very_irregular_verbs[str][tense][subj]
             else:
-                print("Subject not found. Check irregular verbs!")
                 return False
         else:
-            print("Tense not found. Check irregular verbs!")
             return False
     elif str in irregular_verbs:
-        print("IRREGULAR VERB DETECTED")
         print(str, tense, subj)
         if tense in irregular_verbs[str]:
             return irregular_verbs[str][tense]
         else:
-            print("Tense not found. Check irregular verbs!")
             return False
     else:
         return False
 
-def parse_string(s):
-    parts = s.split('+')
-    if len(parts) == 4:
-        negative, subject, tense, root = parts
-    elif len(parts) == 3:
-        subject, tense, root = parts
-        negative = False
-    else:
-        raise ValueError('Invalid string format')
-    
-    if negative == 'NEG':
-        negative = True
-    else:
-        negative = False
-    
-    return negative, subject, tense, root
-    
 
 def conjugate_english(verbString):
-    # negative: True, False
-    # subject: 1p, 2p, 3p, 1s, 2s, 3s
-    # tense: IMP, PAS, FUT, PRES, PERF
+    negative, subject, tense, root, compound_verb = parse_verb_string(verbString)
 
-    negative, subject, tense, root = parse_string(verbString)
-
-    phrase = root
-
+    if subject not in pronouns:
+        raise ValueError('Invalid subject')
+    
     # Check if verb is irregular
-    irregular = check_irregular(phrase, tense, subject)
-    if irregular:
-        phrase = irregular
+    irregular = check_irregular(root, tense, subject)
+    phrase = irregular if irregular else root 
 
+    syl = syllables.estimate(phrase)
+    print(syl)
 
     if tense == 'IMP':
-        return phrase
+        return phrase + compound_verb
     
     if tense == 'PAST':
         # NOTES:
+        # Issue with double-consonant ending PAST conjugation eg. dragged, hugged, planned
 
-        # "to be <verb>" form phrases are irregular and dont work yet
-        # 1p+PAST+kufurahi	we were happy
-        # 1s+PAST+kushtuka	I was shocked
+        if not irregular:
+            phrase = re.sub(r'e$', 'ed', phrase)
+            if re.search(r'[^aeiou]y$', phrase):
+                phrase = re.sub(r'y$', 'ied', phrase)
+            # the twinning rule, eg. skim -> skimmed
+            # 1)ends in a vowel + consonant
+            # 2)is monosyllabic
+            # 3)is not a verb ending in w, x, or y
+            # 4)only has one vowel 
+            if re.search(r'^[^aeiou]+[aeiou][^aeiou]$', phrase) and syl == 1 and not phrase.endswith(('w', 'x', 'y')):
+                phrase += phrase[-1] + 'ed'
+                
+            phrase += 'ed' if not phrase.endswith('ed') else ''
 
-        # Issue with double-consonant ending past conjugation noted below eg. dragged, hugged, planned
-
-        # need to check for past tenst ends in 't' like 'slept'
-
-        helping_verbs = {
-            '1p': 'did',
-            '2p': 'did',
-            '3p': 'did',
-            '1s': 'did',
-            '2s': 'did',
-            '3s': 'did'
-        }
-
-        if negative == False:
-
-            if irregular == False:
-
-                if root.endswith('e'):
-                    phrase = root + 'd'
-                elif root.endswith('y'):
-                    if root[-2] in consonants:
-                        phrase = root[:-1] + 'ied'
-                    elif root[-2] in vowels:
-                        phrase = root + 'ed'
-
-                # This works for 1 syllable words but
-                # the rules are more complex for 2 syllable words
-                # elif (root[-3] in consonants and
-                #         root[-2] in vowels and
-                #         root[-1] in consonants):
-                #     phrase = root + root[-1] + 'ed'            
-                else:
-                    phrase = root + 'ed'
-            
-            phrase = pronouns[subject] + ' ' + phrase
-
-        # negative past tense gets helping verb
-        #takes root instead of past tense for negative. For irregulars
-        else:
-            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + root 
-            
-        return phrase
-    
-    if tense == 'FUT':
-        helping_verbs = {
-            '1p': 'will',
-            '2p': 'will',
-            '3p': 'will',
-            '1s': 'will',
-            '2s': 'will',
-            '3s': 'will'
-        }
-
-        if negative == False:
-            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' ' + phrase
-        else:
-            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
+        if negative:
+            # irregular NEG+PAST takes root instead of past tense
+            return pronouns[subject] + ' ' + 'did not ' + root + compound_verb 
         
-        return phrase
-    
+        return pronouns[subject] + ' ' + phrase + compound_verb
+   
+    if tense == 'FUT':
+        if negative:
+            return pronouns[subject] + ' will not ' + phrase + compound_verb
+        
+        return pronouns[subject] + ' will ' + phrase + compound_verb        
+        
     if tense == 'PRES':
         es_suffix = ('ss', 'x', 'ch', 'sh', 'o', 'z')
         helping_verbs = {
@@ -158,23 +96,23 @@ def conjugate_english(verbString):
             '3s': 'does'
         }
 
-        if negative == False:
-            if irregular == False:
-            
-                if phrase.endswith(es_suffix) and subject == '3s':
-                    phrase = phrase + 'es'
-                elif phrase[-2] in consonants and phrase.endswith('y') and subject == '3s':
-                    phrase = phrase[:-1] + 'ies'
-                elif subject == '3s':
-                    phrase = phrase + 's'
+        if not irregular:           
+            if subject == '3s':
+                if phrase.endswith(es_suffix):
+                    phrase += 'es'
+                elif re.search(r'[^aeiou]y$', phrase):
+                    phrase = re.sub(r'y$', 'ies', phrase)
                 else:
-                    phrase = phrase
+                    phrase += 's'
 
-            phrase = pronouns[subject] + ' ' + phrase
-        else:
-            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
+        if negative:
+            if root == 'be':
+                # negative present tense 'to be' inverts negation word order and omits helping verb
+                return pronouns[subject] + ' ' + phrase + ' not' + compound_verb
+            else:
+                return pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase + compound_verb
 
-        return phrase
+        return pronouns[subject] + ' ' + phrase + compound_verb
     
     if tense == 'PERF':
         helping_verbs = {
@@ -186,36 +124,22 @@ def conjugate_english(verbString):
             '3s': 'has'
         }
 
-        if negative == False:
-            if irregular == False:
-                if phrase.endswith('e'):
-                    phrase = root + 'd'
-                elif phrase.endswith('y'):
-                    if phrase[-2] in consonants:
-                        phrase = phrase[:-1] + 'ied'
-                    elif phrase[-2] in vowels:
-                        phrase = phrase + 'ed'
+        # Phrases with irregular past participles will have unique endings
+        if not irregular:
+            phrase = re.sub(r'e$', 'ed', phrase)
+            if re.search(r'[^aeiou]y$', phrase):
+                phrase = re.sub(r'y$', 'ied', phrase)
+            # the twinning rule, eg. plan -> planned
+            if re.search(r'^[^aeiou]+[aeiou][^aeiou]$', phrase) and syl == 1 and not phrase.endswith(('w', 'x', 'y')):
+                phrase += phrase[-1] + 'ed'
 
-                # This works for 1 syllable words but
-                # the rules are more complex for 2 syllable words
-                # elif (phrase[-3] in consonants and
-                #         phrase[-2] in vowels and
-                #         phrase[-1] in consonants):
-                #     phrase = phrase + phrase[-1] + 'ed'            
-                else:
-                    phrase = phrase + 'ed'
-            
-            phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' ' + phrase
+            phrase += 'ed' if not phrase.endswith('ed') else ''
 
-        else:
-            if irregular:
-                phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase
-            else:
-                phrase = pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase + 'ed'
-       
-        return phrase
+        if negative:
+            return pronouns[subject] + ' ' + helping_verbs[subject] + ' not ' + phrase + compound_verb
         
-    
+        return pronouns[subject] + ' ' + helping_verbs[subject] + ' ' + phrase + compound_verb
+
     else:
         raise ValueError('Invalid tense')
     

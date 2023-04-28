@@ -47,6 +47,10 @@
         "PAST": "went",
         "PERF": "gone"
     },
+    "grow": {
+        "PAST": "grew",
+        "PERF": "grown"
+    },
     "hear": {
         "PAST": "heard",
         "PERF": "heard"
@@ -146,5 +150,33 @@
     "write": {
         "PAST": "wrote",
         "PERF": "written"
+    },
+    "commit": {
+        "PAST": "committed",
+        "PERF": "committed"
+    },
+    "equal": {
+        "PAST": "equalled",
+        "PERF": "equalled"
+    },
+    "occur": {
+        "PAST": "occurred",
+        "PERF": "occurred"
+    },
+    "prefer": {
+        "PAST": "preferred",
+        "PERF": "preferred"
+    },
+    "rival": {
+        "PAST": "rivalled",
+        "PERF": "rivalled"
+    },
+    "submit": {
+        "PAST": "submitted",
+        "PERF": "submitted"
+    },
+    "transfer": {
+        "PAST": "transferred",
+        "PERF": "transferred"
     }
 }
