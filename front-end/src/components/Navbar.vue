@@ -21,6 +21,11 @@ let showProfileMenu = ref(false);
 function toggleProfileMenu() {
     showProfileMenu.value = !showProfileMenu.value;
 }
+
+function logout(){
+  userToken.clearUser();
+
+}
     
 </script>
 
@@ -46,7 +51,6 @@ function toggleProfileMenu() {
                 <button class="profile-button" @click="toggleProfileMenu">{{ username }}</button>
                 <div class="profile-menu" v-if="showProfileMenu">
                     <ul>
-                        <li><router-link to="/profile">Profile</router-link></li>
                         <li><button @click="logout">Logout</button></li>
                     </ul>
                 </div>

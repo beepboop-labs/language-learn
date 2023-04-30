@@ -30,6 +30,7 @@ export const userToken = reactive({
     this.userId = null;
     this.username = null;
     this.loggedin = false;
+    
   }
 
 })
