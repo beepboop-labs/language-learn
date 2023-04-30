@@ -1,6 +1,7 @@
 <script setup>
   import { ref, watch, onMounted } from 'vue';
   import { useRouter, useRoute } from 'vue-router'
+  import { userToken } from '../user-token';
 
   const router = useRouter();
 const props = defineProps({
@@ -77,6 +78,37 @@ const props = defineProps({
   }
 
   function completeQuiz() {
+    const options = { 
+      language: userToken.language,
+      userid: userToken.userId,
+      unit: parseInt(props.unit),
+      quiz: 1
+      
+    }
+    console.log(props.unit);
+    console.log(typeof props.unit);
+    console.log(options.unit);
+    console.log(typeof options.unit);
+    
+
+    // send login data to the API 
+    fetch("http://127.0.0.1:5000/user/complete-quiz", { 
+      method: 'POST',
+      body: JSON.stringify(options),
+      headers: { 'Content-Type': 'application/json' } 
+    }).then(res => res.json().then(json => ({
+        response: res,
+        json
+      })))
+      .then(({ response, json }) => {
+          if(!response.ok){
+            throw new Error(response.status + " " + json.message);
+          }
+          
+      })
+      .catch(err => {
+        alert('Unable to get activity. ' + err)
+      })
     message.value = "Congratulations, you finished the quiz!"
     router.push("/")  
   }
