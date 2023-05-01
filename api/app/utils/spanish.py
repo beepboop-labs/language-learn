@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def parse_string(s):
     parts = s.split('+')
     if len(parts) == 4:
@@ -31,7 +33,7 @@ def conjugate_spanish(verbString):
 
 
         if phrase.endswith('ar'):
-            affirmative_endings = {
+            endings = {
                 '1s':'',
                 '2s':'a',
                 '3s':'e',
@@ -40,15 +42,15 @@ def conjugate_spanish(verbString):
                 '3p':'en'
 
             }
-            negative_endings =  {
-                '1s':'no',
-                '2s':'no',
-                '3s':'no',
-                '1p':'no',
-                '2p':'no',
-                '3p':'no'
+            # negative_endings =  {
+            #     '1s':'no',
+            #     '2s':'no',
+            #     '3s':'no',
+            #     '1p':'no',
+            #     '2p':'no',
+            #     '3p':'no'
 
-            }
+            # }
 
             if negative:
                 return "no " + phrase[:-2] + endings[subject]
@@ -56,7 +58,7 @@ def conjugate_spanish(verbString):
         
 
         elif phrase.endswith('er') or phrase.endswith('ir'):
-             affirmative_endings = {
+             endings = {
                 '1s':'',
                 '2s':'e',
                 '3s':'a',
@@ -65,15 +67,15 @@ def conjugate_spanish(verbString):
                 '3p':'an'
 
             }
-             negative_endings =  {
-                '1s':'no',
-                '2s':'no',
-                '3s':'no',
-                '1p':'no',
-                '2p':'no',
-                '3p':'no'
+            #  negative_endings =  {
+            #     '1s':'no',
+            #     '2s':'no',
+            #     '3s':'no',
+            #     '1p':'no',
+            #     '2p':'no',
+            #     '3p':'no'
 
-            }
+            # }
         else:
             phrase = "ENDING NOT FOUND"
             return phrase
@@ -129,42 +131,18 @@ def conjugate_spanish(verbString):
 
     #FUTURE TENSE
     if tense == 'FUT':
-        if phrase.endswith('ar'):
-            endings = {
-                 '1s':'é',
-                '2s':'ás',
-                '3s':'á',
-                '1p':'emos',
-                '2p':'éis',
-                '3p':'án'
-            }
-
-            if negative:
-                return "no " + phrase[:-2] + endings[subject]
-            return phrase[:-2] + endings[subject]
+        endings = {
+            '1s':'é',
+        '2s':'ás',
+        '3s':'á',
+        '1p':'emos',
+        '2p':'éis',
+        '3p':'án'
+    }
         
-
-        elif phrase.endswith('er') or phrase.endswith('ir'):
-             endings = {
-                 '1s':'é',
-                '2s':'ás',
-                '3s':'á',
-                '1p':'emos',
-                '2p':'éis',
-                '3p':'án'
-            }
-
-        else:
-            phrase = "ENDING NOT FOUND"
-            return phrase 
-            
         if negative:
-                return "no " + phrase[:-2] + endings[subject]
-        return phrase[:-2] + endings[subject]  
-    
-    
-        
-    
+            return "no " + phrase + endings[subject]
+        return phrase + endings[subject] 
 
 
     #PRESENT TENSE
@@ -225,58 +203,59 @@ def conjugate_spanish(verbString):
     
     if tense == 'PERF':
         if phrase.endswith('ar'):
-            past_participle = phrase[:-2] + 'ado'
-            endings = {
-                '1s':'o',
-                '2s':'as',
-                '3s':'a',
-                '1p':'amos',
-                '2p':'áis',
-                '3p':'an'
+            phrase = phrase[:-2] + 'ado'
+            helper_verb = {
+                '1s':'he',
+                '2s':'has',
+                '3s':'ha',
+                '1p':'hemos',
+                '2p':'habéis',
+                '3p':'han'
             }
 
             
 
             if negative:
-                return "no " + phrase[:-2] + endings[subject]
-            return phrase[:-2] + endings[subject]
+                return "no " + helper_verb[subject] + " " + phrase
+            return helper_verb[subject] + " " + phrase
 
 
         elif phrase.endswith('er') or phrase.endswith('ir'):
-            past_participle = phrase[:-2] + 'ido'
+            phrase = phrase[:-2] + 'ido'
             
-            endings ={
-                '1s':'o',
-                '2s':'es',
-                '3s':'e',
-                '1p':'emos',
-                '2p':'éis',
-                '3p':'en'
+            helper_verb = {
+                '1s':'he',
+                '2s':'has',
+                '3s':'ha',
+                '1p':'hemos',
+                '2p':'habéis',
+                '3p':'han'
+            }
 
-            } 
+            
 
             if negative:
-                return "no " + phrase[:-2] + endings[subject]
-            return phrase[:-2] + endings[subject]
+                return "no " + helper_verb[subject] + " " + phrase
+            return helper_verb[subject] + " " + phrase
 
-        elif phrase.endswith('ir'):  # verb.endswith('ir')
-            past_participle = phrase[:-2] + 'ido'
-            endings ={
-                '1s':'o',
-                '2s':'es',
-                '3s':'e',
-                '1p':'imos',
-                '2p':'ís',
-                '3p':'en'
-            }
+        # elif phrase.endswith('ir'):  # verb.endswith('ir')
+        #     past_participle = phrase[:-2] + 'ido'
+        #     endings ={
+        #         '1s':'o',
+        #         '2s':'es',
+        #         '3s':'e',
+        #         '1p':'imos',
+        #         '2p':'ís',
+        #         '3p':'en'
+        #     }
 
         else:
             phrase = "ENDING NOT FOUND"
             return phrase
 
-        if negative:
-                return "no " + phrase[:-2] + endings[subject]
-        return phrase[:-2] + endings[subject] 
+        # if negative:
+        #         return "no " + phrase[:-2] + endings[subject]
+        # return phrase[:-2] + endings[subject] 
 
         
     
