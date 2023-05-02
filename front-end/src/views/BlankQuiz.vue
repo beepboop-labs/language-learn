@@ -29,7 +29,7 @@
 
 
   function initializeQuiz() {
-    const options = {"primaryLanguage": "primary", secondaryLanguage: props.secondaryLanguage, "unit": props.unit, "length": 10}
+    const options = {"primaryLanguage": "primary", secondaryLanguage: props.secondaryLanguage, "unit": parseInt(props.unit), "length": 10}
 
 
     // Fetching the quiz data from the API
@@ -109,7 +109,7 @@
           
       })
       .catch(err => {
-        alert('Unable to get activity. ' + err)
+        console.log('Unable to get activity. ' + err)
       })
     message.value = "Congratulations, you finished the quiz!"
     router.push("/")  
@@ -130,6 +130,7 @@
   <div id="fill-in-the-blank-quiz">
     <div class="progress">{{ quizIndex + 1 }}/{{ quizLength }}</div>
     <div class="question">
+      <p>Please write the following in english:</p>
       <span class="prompt">{{ secondaryWord }}</span>
       <input type="text" v-model="userAnswer" placeholder=" " />
     </div>

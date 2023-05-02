@@ -45,6 +45,7 @@ function setLanguage(lang){
   userToken.language = lang
   console.log(lang)
   console.log(userToken.language)
+  getActivity()
 
 }
 function getActivity(){
@@ -71,7 +72,7 @@ function getActivity(){
           
       })
       .catch(err => {
-        alert('Unable to get activity. ' + err)
+        console.log('Unable to get activity. ' + err)
       })
   }
 
@@ -80,17 +81,23 @@ function getActivity(){
 
 <template>
   <div class="container">
-    <img src="../assets/Images/istockphoto-1268465415-612x612.jpg" class="image" alt="..." v-if="!loggedin">
+    <div class="welcome" v-if="!loggedin">
+      <h1>Welcome to the Language Learning App!</h1>
+      <p>Please login or register to view the course roadmap</p>
     
+      <img src="../assets/Images/istockphoto-1268465415-612x612.jpg" class="image" alt="...">
+    </div>
    <!-- <div id="login-message" v-if="!loggedin">
     <p>Please login to view the roadmap</p>
   </div> -->
   <!-- <div>{{ activity.spanish.unit1.q1 }}</div> -->
   <div id="roadmap" v-if="loggedin">
+    <h4>Choose a language:</h4>
     <button type="button" @click="setLanguage('spanish')">Spanish</button>
     <button type="button" @click="setLanguage('swahili')">Swahili</button>
     <h1>{{ userToken.language }}</h1>
     <h2>Unit 1</h2>
+    <h4>Present & Imperative Tense</h4>
     <ul> 
       <li>
         <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 1}}">Multiple Choice</router-link>
@@ -106,6 +113,7 @@ function getActivity(){
       </li>
     </ul>
     <h2>Unit 2</h2>
+    <h4>Past & Future Tense</h4>
     <p></p>
     <ul>
       <li>
@@ -123,6 +131,7 @@ function getActivity(){
       
     </ul>
     <h2>Unit 3</h2>
+    <h4>Past, Future, and Present-Perfect Tense</h4>
     <p></p>
     <ul>
       <li>
@@ -138,6 +147,10 @@ function getActivity(){
         <span v-if="activity.activity.unit3.q3">  -->Completed!</span>
       </li>
     </ul>
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
   </div>
 </template>
@@ -146,7 +159,7 @@ function getActivity(){
 
 
 <style scoped>
-login-message {
+#login-message {
   background-color: #f2f2f2;
   padding: 20px;
   text-align: center;
@@ -155,6 +168,7 @@ login-message {
 
 #roadmap {
   padding: 20px;
+  margin-bottom: 100px;
 }
 
 #roadmap h1 {
@@ -179,17 +193,22 @@ roadmap li {
 }
 
 .container {
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
+  margin-bottom: 100px;
 }
 
+.welcome {
+  text-align: center;
+}
 .image{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  margin: 0 auto;
+  height: 60vh;
+  width: 60vw;
 }
 
 .image img {

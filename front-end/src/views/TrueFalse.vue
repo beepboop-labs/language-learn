@@ -125,7 +125,7 @@
           
       })
       .catch(err => {
-        alert('Unable to get activity. ' + err)
+        console.log('Unable to get activity. ' + err)
       })
     message.value = "Congratulations, you finished the quiz!"
     router.push("/")  
@@ -149,7 +149,7 @@
 
   function initializeQuiz() {
     //POST request options
-    const options = {"primaryLanguage": "primary", secondaryLanguage: props.secondaryLanguage, "unit": props.unit, "length": 10}
+    const options = {"primaryLanguage": "primary", secondaryLanguage: props.secondaryLanguage, "unit": parseInt(props.unit), "length": 10}
 
     // Fetch the quiz data from the API
     fetch(quizURL, {
@@ -185,7 +185,7 @@
     <div id="true-false-quiz">
       <div class="progress">{{ quizIndex + 1 }}/{{ quizLength }}</div>
       <div class="question">
-        <div>Does the below translation from primary to secondary is True/False?</div>
+        <div>Does the below translation from english to {{props.secondaryLanguage}} is True/False?</div>
         <span class="prompt">{{ primaryWord }}</span>
         <br/>
         <span class="prompt">{{ secondaryWord }}</span>

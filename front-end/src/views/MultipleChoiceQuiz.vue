@@ -107,7 +107,7 @@ const props = defineProps({
           
       })
       .catch(err => {
-        alert('Unable to get activity. ' + err)
+        console.log('Unable to get activity. ' + err)
       })
     message.value = "Congratulations, you finished the quiz!"
     router.push("/")  
@@ -131,7 +131,7 @@ const props = defineProps({
 
   function initializeQuiz() {
     //POST request options 
-    const options = {"primaryLanguage": "english", secondaryLanguage: props.secondaryLanguage, "unit": props.unit, "length": 10}
+    const options = {"primaryLanguage": "english", secondaryLanguage: props.secondaryLanguage, "unit": parseInt(props.unit), "length": 10}
     console.log(options)
     // Fetch the quiz data from the API
     fetch(quizURL, {

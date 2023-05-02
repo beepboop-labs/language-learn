@@ -21,7 +21,7 @@ export default {
 
 <style scoped>
 #content {
-  margin-top: 40px;
+  margin-top: 60px;
 }
 </style>
 
