@@ -8,10 +8,7 @@ const router = useRouter();
 let username = ref(userToken.getUsername())
 // This is a built-in lifecycle hook from Vue
 onMounted(() => {
-  
    username.value = userToken.getUsername()
-  
-    
   });
 
   watch(userToken, () => {
@@ -19,10 +16,11 @@ onMounted(() => {
 })
     
     
-let showProfileMenu = ref(false);
+let showMobileMenu = ref(false);
 
-function toggleProfileMenu() {
-    showProfileMenu.value = !showProfileMenu.value;
+function toggleMobileMenu() {
+    console.log("clicked")
+    showMobileMenu.value = !showMobileMenu.value;
 }
 
 function logout(){
@@ -36,7 +34,7 @@ function logout(){
 <template>
     <div id="navbar">
         <div class="nav-menu">
-            <div class="hamburger" @click="showMenu" >
+            <div class="hamburger" @click="toggleMobileMenu" >
                 <font-awesome-icon icon="fa-bars" />
             </div> 
             <div class="nav-content" :class="{ 'open-menu': showMobileMenu, 'close-menu': !showMobileMenu }"> 
@@ -47,18 +45,27 @@ function logout(){
                     <li>
                         <router-link to="/register">Register</router-link>
                     </li>
+                    <li>
+                      <div v-if="!username" class="login-button">
+                          <router-link to="/login">Login</router-link>
+                      </div>
+                    </li>
+                    <li>
+                      <div v-if="username" class="username">
+                        {{ username }} / <button @click="logout">Logout</button>
+                      </div>
+                      
+                    </li>
                 </ul>
-            <div v-if="!username" class="login-button">
-                <router-link to="/login">Login</router-link>
-            </div>
-            <div v-if="username" class="username">
+            
+            <!-- <div v-if="username" class="username">
                 <button class="profile-button" @click="toggleProfileMenu">{{ username }}</button>
                 <div class="profile-menu" v-if="showProfileMenu">
                     <ul>
                         <li><button @click="logout">Logout</button></li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
             </div>
         </div>
     </div>
@@ -114,36 +121,58 @@ li {
 
 .nav-menu {
     background-color: #ffdfa8;
+    padding-top: 10px;
+    position: absolute;
+    width: 100%;
 }
 
  
 
 .nav-content {
-  display: flex;
+    flex-direction: column;
+    z-index: 100;
+    position: relative;
+    transition: all 0.2s ease-out;
+  /* display: flex;
   justify-content: space-between;
   padding: 10px 30px;
-  align-items: center;
+  align-items: center; */
 }
 
 .nav-items {
-  display: flex;
+  flex-direction: column;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0; */
 }
 
 li {
   padding: 0 10px;
 }
 
+.open-menu {
+    opacity: 1;
+  }
+
+  .close-menu {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+  }
+
 .hamburger {
-  display: none;
+    display: block;
+    text-align: right;
+    padding: 0 10px 10px 0; 
+}
+
 }
 
 /* Mobile version - hidden hamburger menu */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   #navbar {
     padding-top: 10px;
     position: absolute;
@@ -228,5 +257,5 @@ li {
     background-color: #e35555;
   }
 }
-}
+} */
 </style>

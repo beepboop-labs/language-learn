@@ -80,6 +80,10 @@ function getActivity(){
 
 <template>
   <div class="container">
+    <div v-if="!loggedin">
+      <h1>Welcome to the Language Learning App!</h1>
+      <p>Please login or register to view the course roadmap</p>
+    </div>
     <img src="../assets/Images/istockphoto-1268465415-612x612.jpg" class="image" alt="..." v-if="!loggedin">
     
    <!-- <div id="login-message" v-if="!loggedin">
@@ -146,7 +150,7 @@ function getActivity(){
 
 
 <style scoped>
-login-message {
+#login-message {
   background-color: #f2f2f2;
   padding: 20px;
   text-align: center;
@@ -179,10 +183,11 @@ roadmap li {
 }
 
 .container {
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
 }
 
 .image{
@@ -190,6 +195,7 @@ roadmap li {
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
 .image img {
