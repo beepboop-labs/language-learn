@@ -149,7 +149,7 @@
 
   function initializeQuiz() {
     //POST request options
-    const options = {"primaryLanguage": "primary", secondaryLanguage: props.secondaryLanguage, "unit": props.unit, "length": 10}
+    const options = {"primaryLanguage": "primary", secondaryLanguage: props.secondaryLanguage, "unit": parseInt(props.unit), "length": 10}
 
     // Fetch the quiz data from the API
     fetch(quizURL, {
