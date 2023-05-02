@@ -70,9 +70,8 @@
     </form>
     </div>
     <div class="loginLink">
-    Already have an account? 
+    <span>Already have an account? </span>
     <router-link to = "/Login">Login here</router-link><br><br>
-    <router-link to = "/" class="home">Home</router-link>
   </div>
 </template>
 
@@ -88,7 +87,7 @@ h1 {
 }
 .loginLink{
   margin-top: 30px;
-  margin-left: 600px;
+  text-align: center;
 }
 .home {
   margin-left: 150px;

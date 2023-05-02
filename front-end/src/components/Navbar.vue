@@ -42,7 +42,7 @@ function logout(){
                 <router-link to="/">Home</router-link>
             </div> 
                 <ul class="nav-items">
-                    <li>
+                    <li v-if="!username">
                         <router-link to="/register">Register</router-link>
                     </li>
                     <li>

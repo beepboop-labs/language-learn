@@ -56,10 +56,8 @@
     </form>
     </div>
     <div class="regLink">
-    Don't have an account? 
+      <span>Don't have an account?  </span> 
     <router-link to = "/Register">Register here<br></router-link>
-    <br>
-    <router-link to = "/" class="home">Home</router-link>
   </div>
 </template>
 
@@ -75,7 +73,7 @@ h1 {
 }
 .regLink{
   margin-top: 30px;
-  margin-left: 600px;
+  text-align: center;
 }
 .home {
   margin-left: 150px;

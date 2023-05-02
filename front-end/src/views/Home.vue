@@ -45,6 +45,7 @@ function setLanguage(lang){
   userToken.language = lang
   console.log(lang)
   console.log(userToken.language)
+  getActivity()
 
 }
 function getActivity(){
@@ -80,17 +81,18 @@ function getActivity(){
 
 <template>
   <div class="container">
-    <div v-if="!loggedin">
+    <div class="welcome" v-if="!loggedin">
       <h1>Welcome to the Language Learning App!</h1>
       <p>Please login or register to view the course roadmap</p>
-    </div>
-    <img src="../assets/Images/istockphoto-1268465415-612x612.jpg" class="image" alt="..." v-if="!loggedin">
     
+      <img src="../assets/Images/istockphoto-1268465415-612x612.jpg" class="image" alt="...">
+    </div>
    <!-- <div id="login-message" v-if="!loggedin">
     <p>Please login to view the roadmap</p>
   </div> -->
   <!-- <div>{{ activity.spanish.unit1.q1 }}</div> -->
   <div id="roadmap" v-if="loggedin">
+    <h4>Choose a language:</h4>
     <button type="button" @click="setLanguage('spanish')">Spanish</button>
     <button type="button" @click="setLanguage('swahili')">Swahili</button>
     <h1>{{ userToken.language }}</h1>
@@ -188,14 +190,17 @@ roadmap li {
   align-items: center;
   height: 100vh;
   width: 100%;
+  margin-bottom: 40px;
 }
 
+.welcome {
+  text-align: center;
+}
 .image{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+  margin: 0 auto;
+  height: 60vh;
+  width: 60vw;
 }
 
 .image img {
