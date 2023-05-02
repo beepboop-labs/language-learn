@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from app.utils.spanish import conjugate_spanish
 import csv
 import pytest
