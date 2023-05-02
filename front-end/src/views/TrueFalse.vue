@@ -185,7 +185,7 @@
     <div id="true-false-quiz">
       <div class="progress">{{ quizIndex + 1 }}/{{ quizLength }}</div>
       <div class="question">
-        <div>Does the below translation from primary to secondary is True/False?</div>
+        <div>Does the below translation from english to {{props.secondaryLanguage}} is True/False?</div>
         <span class="prompt">{{ primaryWord }}</span>
         <br/>
         <span class="prompt">{{ secondaryWord }}</span>
