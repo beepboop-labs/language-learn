@@ -132,10 +132,9 @@ class TestRegister:
         assert response.status_code == 400
 
 class TestUserActivity:
-
     def test_success(self, client):
         # Send a login request with the user credentials
-        data = {'userId': 1}
+        data = {'userid': 1, 'language': 'spanish'}
         response = client.post('/user/activity', data=json.dumps(data), content_type='application/json')
 
         # Check that the response is successful
@@ -145,12 +144,59 @@ class TestUserActivity:
         response_data = json.loads(response.data)
         assert 'username' in response_data
 
+    def test_missing_property(self, client):
+        data = {'userid': 1}
+        response = client.post('/user/activity', data=json.dumps(data), content_type='application/json')
+
+        # Check response is bad request
+        assert response.status_code == 400
+
+    def test_invalid_user_id(self, client):
+        data = {'userid': 999999, 'language': 'spanish'}
+        response = client.post('/user/activity', data=json.dumps(data), content_type='application/json')
+
+        # Check response is bad request
+        assert response.status_code == 400
+    
+    def test_invalid_language(self, client):
+        data = {'userid': 1, 'language': 'french'}
+        response = client.post('/user/activity', data=json.dumps(data), content_type='application/json')
+
+        # Check response is bad request
+        assert response.status_code == 400
+
+    
 
 class TestUserCompleteQuiz:
         def test_success(self, client):
-            data = {'quiz' : 'u1q1'}
+            data = {'userid': 1, 'language': 'spanish', 'unit': 1, 'quiz': 1}
             response = client.post('/user/complete-quiz', data=json.dumps(data), content_type='application/json')
             assert response.status_code == 200
+
+        def test_missing_property(self, client):
+            data = {'userid': 1}
+            response = client.post('/user/complete-quiz', data=json.dumps(data), content_type='application/json')
+            assert response.status_code == 400
+
+        def test_invalid_quiz(self, client):
+            data = {'userid': 1, 'language': 'spanish', 'unit': 1, 'quiz': 1000}
+            response = client.post('/user/complete-quiz', data=json.dumps(data), content_type='application/json')
+            assert response.status_code == 400
+        
+        def test_invalid_unit(self, client):
+            data = {'userid': 1, 'language': 'spanish', 'unit': 1000, 'quiz': 1}
+            response = client.post('/user/complete-quiz', data=json.dumps(data), content_type='application/json')
+            assert response.status_code == 400
+
+        def test_invalid_language(self, client):
+            data = {'userid': 1, 'language': 'french', 'unit': 1, 'quiz': 1}
+            response = client.post('/user/complete-quiz', data=json.dumps(data), content_type='application/json')
+            assert response.status_code == 400
+        
+        def test_invalid_userid(self, client):
+            data = {'userid': 9999999, 'language': 'spanish', 'unit': 1, 'quiz': 1}
+            response = client.post('/user/complete-quiz', data=json.dumps(data), content_type='application/json')
+            assert response.status_code == 400
 
 
 class TestQuiz:

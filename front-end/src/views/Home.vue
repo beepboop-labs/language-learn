@@ -3,9 +3,10 @@ import { userToken } from '../user-token';
 import { ref, onMounted, watch } from 'vue'
 
 let activity = ref({
-    "user-id": null,
+    "userid": null,
     "username": null,
-    "spanish": {
+    "language": null,
+    "activity": {
       "unit1": {
         "q1": false ,
         "q2": false ,
@@ -22,30 +23,17 @@ let activity = ref({
         "q3": false 
       }
     },
-    "swahili": {
-      "unit1": {
-        "q1": false ,
-        "q2": false ,
-        "q3": false
-      },
-      "unit2": {
-        "q1": false ,
-        "q2": false,
-        "q3": false 
-      },
-      "unit3": {
-        "q1": false ,
-        "q2": false ,
-        "q3": false 
-      }
-    } 
   })
 let loggedin = ref(userToken.getLoggedIn())
 // This is a built-in lifecycle hook from Vue
 onMounted(() => {
   
    loggedin.value = userToken.getLoggedIn()
-   getActivity()
+   if(loggedin.value){
+    getActivity()
+
+   }
+   
     
   });
 
@@ -62,7 +50,7 @@ function setLanguage(lang){
 function getActivity(){
   const options = { 
       language: userToken.language,
-      username: userToken.getUsername(),   
+      userid: userToken.userId,
     }
 
     // send login data to the API 
@@ -78,7 +66,7 @@ function getActivity(){
           if(!response.ok){
             throw new Error(response.status + " " + json.message);
           }
-          console.log(json.spanish.unit1.q1)
+          
           activity.value = json
           
       })
@@ -106,15 +94,15 @@ function getActivity(){
     <ul> 
       <li>
         <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 1}}">Multiple Choice</router-link>
-        <span v-if="activity.spanish.unit1.q1">  -->Completed!</span>
+        <span v-if="activity.activity.unit1.q1">  -->Completed!</span>
       </li>
       <li>
         <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: userToken.language, unit: 1}}">Fill in the Blank</router-link>
-        <span v-if="activity.spanish.unit1.q2">  -->Completed!</span>
+        <span v-if="activity.activity.unit1.q2">  -->Completed!</span>
       </li>
       <li>
         <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: userToken.language, unit: 1}}">True or False</router-link>
-        <span v-if="activity.spanish.unit1.q3">  -->Completed!</span>
+        <span v-if="activity.activity.unit1.q3">  -->Completed!</span>
       </li>
     </ul>
     <h2>Unit 2</h2>
@@ -122,15 +110,15 @@ function getActivity(){
     <ul>
       <li>
         <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 2}}">Multiple Choice</router-link>
-        <span v-if="activity.spanish.unit2.q1">  -->Completed!</span>
+        <span v-if="activity.activity.unit2.q1">  -->Completed!</span>
       </li>
       <li>
         <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: userToken.language, unit: 2}}">Fill in the Blank</router-link>
-        <span v-if="activity.spanish.unit2.q2">  -->Completed!</span>
+        <span v-if="activity.activity.unit2.q2">  -->Completed!</span>
       </li>
       <li>
         <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: userToken.language, unit: 2}}">True or False</router-link>
-        <span v-if="activity.spanish.unit2.q3">  -->Completed!</span>
+        <span v-if="activity.activity.unit2.q3">  -->Completed!</span>
       </li>
       
     </ul>
@@ -139,15 +127,15 @@ function getActivity(){
     <ul>
       <li>
         <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 3}}">Multiple Choice</router-link>
-        <span v-if="activity.spanish.unit3.q1">  -->Completed!</span>
+        <span v-if="activity.activity.unit3.q1">  -->Completed!</span>
       </li>
       <li>
         <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: userToken.language, unit: 3}}">Fill in the Blank</router-link>
-        <span v-if="activity.spanish.unit3.q2">  -->Completed!</span>
+        <span v-if="activity.activity.unit3.q2">  -->Completed!</span>
       </li>
       <li>
         <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: userToken.language, unit: 3}}">True or False</router-link>
-        <span v-if="activity.spanish.unit3.q3">  -->Completed!</span>
+        <span v-if="activity.activity.unit3.q3">  -->Completed!</span>
       </li>
     </ul>
   </div>

@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted, watch} from 'vue';
 import { userToken } from '../user-token';
+import { useRouter, useRoute } from 'vue-router';
+
+const router = useRouter();
 
 let username = ref(userToken.getUsername())
 // This is a built-in lifecycle hook from Vue
@@ -20,6 +23,12 @@ let showProfileMenu = ref(false);
 
 function toggleProfileMenu() {
     showProfileMenu.value = !showProfileMenu.value;
+}
+
+function logout(){
+  userToken.clearUser();
+  router.push('/')
+
 }
     
 </script>
@@ -46,7 +55,6 @@ function toggleProfileMenu() {
                 <button class="profile-button" @click="toggleProfileMenu">{{ username }}</button>
                 <div class="profile-menu" v-if="showProfileMenu">
                     <ul>
-                        <li><router-link to="/profile">Profile</router-link></li>
                         <li><button @click="logout">Logout</button></li>
                     </ul>
                 </div>
