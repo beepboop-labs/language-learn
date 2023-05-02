@@ -72,7 +72,7 @@ function getActivity(){
           
       })
       .catch(err => {
-        alert('Unable to get activity. ' + err)
+        console.log('Unable to get activity. ' + err)
       })
   }
 
@@ -97,6 +97,7 @@ function getActivity(){
     <button type="button" @click="setLanguage('swahili')">Swahili</button>
     <h1>{{ userToken.language }}</h1>
     <h2>Unit 1</h2>
+    <h4>Present & Imperative Tense</h4>
     <ul> 
       <li>
         <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 1}}">Multiple Choice</router-link>
@@ -112,6 +113,7 @@ function getActivity(){
       </li>
     </ul>
     <h2>Unit 2</h2>
+    <h4>Past & Future Tense</h4>
     <p></p>
     <ul>
       <li>
@@ -129,6 +131,7 @@ function getActivity(){
       
     </ul>
     <h2>Unit 3</h2>
+    <h4>Past, Future, and Present-Perfect Tense</h4>
     <p></p>
     <ul>
       <li>
@@ -144,6 +147,10 @@ function getActivity(){
         <span v-if="activity.activity.unit3.q3">  -->Completed!</span>
       </li>
     </ul>
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
   </div>
 </template>
@@ -161,6 +168,7 @@ function getActivity(){
 
 #roadmap {
   padding: 20px;
+  margin-bottom: 100px;
 }
 
 #roadmap h1 {
@@ -190,7 +198,7 @@ roadmap li {
   align-items: center;
   height: 100vh;
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
 }
 
 .welcome {

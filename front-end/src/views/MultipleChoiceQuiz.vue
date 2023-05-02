@@ -107,7 +107,7 @@ const props = defineProps({
           
       })
       .catch(err => {
-        alert('Unable to get activity. ' + err)
+        console.log('Unable to get activity. ' + err)
       })
     message.value = "Congratulations, you finished the quiz!"
     router.push("/")  
