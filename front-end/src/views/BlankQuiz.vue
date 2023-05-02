@@ -52,12 +52,16 @@
   }
 
   function loadNextQuestion(){
+    if (quizIndex.value < quizLength-1){
+
+    
     quizIndex.value += 1
     secondaryWord.value = data.words[quizIndex.value].secondary
     answer = data.words[quizIndex.value].primary
     userAnswer.value = ""
     message.value = ""
     showSkipButton.value = false
+    }
   }
 
   function submitAnswer(){

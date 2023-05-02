@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted, computed } from 'vue'
   import { useRouter, useRoute } from 'vue-router'
   import { userToken } from '../user-token';
 
@@ -26,6 +26,9 @@
   let quizLength = 0
   let selectedAnswer = ref("")
   let message = ref("")
+  let submitDisabled = computed(() => {
+  return selectedAnswer.value == ''
+})
 
 
   function setQuestions() {
@@ -193,7 +196,7 @@
         <input type="radio" id="false" name="answers" value="false" v-model="selectedAnswer">
         <label for="false">False</label>
       </div>
-      <button @click="submitAnswer" type="button">Submit</button>
+      <button @click="submitAnswer" :disabled="submitDisabled" type="button">Submit</button>
       <div class="message">{{ message }}</div>
     </div>
   </template>

@@ -1,6 +1,9 @@
 <script setup>
 import { ref, onMounted, watch} from 'vue';
 import { userToken } from '../user-token';
+import { useRouter, useRoute } from 'vue-router';
+
+const router = useRouter();
 
 let username = ref(userToken.getUsername())
 // This is a built-in lifecycle hook from Vue
@@ -24,6 +27,7 @@ function toggleProfileMenu() {
 
 function logout(){
   userToken.clearUser();
+  router.push('/')
 
 }
     
