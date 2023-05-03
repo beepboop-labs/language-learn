@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def parse_string(s):
     parts = s.split('+')
     if len(parts) == 4:
@@ -24,25 +26,236 @@ def conjugate_spanish(verbString):
 
     phrase = root
 
+
+    #IMP TENSE
+    
     if tense == 'IMP':
-        return root
+
+
+        if phrase.endswith('ar'):
+            endings = {
+                '1s':'',
+                '2s':'a',
+                '3s':'e',
+                '1p':'emos',
+                '2p':'ad',
+                '3p':'en'
+
+            }
+            # negative_endings =  {
+            #     '1s':'no',
+            #     '2s':'no',
+            #     '3s':'no',
+            #     '1p':'no',
+            #     '2p':'no',
+            #     '3p':'no'
+
+            # }
+
+            if negative:
+                return "no " + phrase[:-2] + endings[subject]
+            return phrase[:-2] + endings[subject]
+        
+
+        elif phrase.endswith('er') or phrase.endswith('ir'):
+             endings = {
+                '1s':'',
+                '2s':'e',
+                '3s':'a',
+                '1p':'amos',
+                '2p':'ed',
+                '3p':'an'
+
+            }
+            #  negative_endings =  {
+            #     '1s':'no',
+            #     '2s':'no',
+            #     '3s':'no',
+            #     '1p':'no',
+            #     '2p':'no',
+            #     '3p':'no'
+
+            # }
+        else:
+            phrase = "ENDING NOT FOUND"
+            return phrase
+             
+        if negative:
+            return "no " + phrase[:-2] + endings[subject]
+        return phrase[:-2] + endings[subject]
     
-    if tense == 'PAST':
-        # NOTES:
+    
+    
             
-        return phrase
+        
     
+
+    #PAST TENSE
+    if tense == 'PAST':
+        
+        if phrase.endswith('ar'):
+            endings = {
+                '1s':'é',
+                '2s':'aste',
+                '3s':'ó',
+                '1p':'amos',
+                '2p':'asteis',
+                '3p':'aron'
+            }
+
+            if negative:
+                return "no " + phrase[:-2] + endings[subject]
+            return phrase[:-2] + endings[subject]
+
+        elif phrase.endswith('er') or phrase.endswith('ir'):
+            endings={
+                '1s':'í',
+                '2s':'iste',
+                '3s':'ió',
+                '1p':'imos',
+                '2p':'isteis',
+                '3p':'ieron'
+
+            }
+        else:
+            phrase = "ENDING NOT FOUND"
+            return phrase  
+        
+        if negative:
+                return "no " + phrase[:-2] + endings[subject]
+        return phrase[:-2] + endings[subject]
+            
+       
+
+
+
+    #FUTURE TENSE
     if tense == 'FUT':
+        endings = {
+            '1s':'é',
+        '2s':'ás',
+        '3s':'á',
+        '1p':'emos',
+        '2p':'éis',
+        '3p':'án'
+    }
+        
+        if negative:
+            return "no " + phrase + endings[subject]
+        return phrase + endings[subject] 
 
-        return phrase
-    
+
+    #PRESENT TENSE
+    # phrase = "hablar"
     if tense == 'PRES':
+        if phrase.endswith('ar'):
+            endings = {
+                '1s':'o',
+                '2s':'as',
+                '3s':'a',
+                '1p':'amos',
+                '2p':'áis',
+                '3p':'an'
+            }
 
-        return phrase
+            if negative:
+                return "no " + phrase[:-2] + endings[subject]
+            return phrase[:-2] + endings[subject]
+
+        elif phrase.endswith('er'):
+            endings ={
+                '1s':'o',
+                '2s':'es',
+                '3s':'e',
+                '1p':'emos',
+                '2p':'éis',
+                '3p':'en'
+
+            } 
+
+            if negative:
+                return "no " + phrase[:-2] + endings[subject]
+            return phrase[:-2] + endings[subject]
+
+        elif phrase.endswith('ir'):  # verb.endswith('ir')
+            endings ={
+                '1s':'o',
+                '2s':'es',
+                '3s':'e',
+                '1p':'imos',
+                '2p':'ís',
+                '3p':'en'
+            } 
+
+        else:
+            phrase = "ENDING NOT FOUND"
+            return phrase
+        
+
+        if negative:
+                return "no " + phrase[:-2] + endings[subject]
+        return phrase[:-2] + endings[subject]
+           
+    
+
+
+    #PERFECT TENSE
     
     if tense == 'PERF':
-       
-        return phrase
+        if phrase.endswith('ar'):
+            phrase = phrase[:-2] + 'ado'
+            helper_verb = {
+                '1s':'he',
+                '2s':'has',
+                '3s':'ha',
+                '1p':'hemos',
+                '2p':'habéis',
+                '3p':'han'
+            }
+
+            
+
+            if negative:
+                return "no " + helper_verb[subject] + " " + phrase
+            return helper_verb[subject] + " " + phrase
+
+
+        elif phrase.endswith('er') or phrase.endswith('ir'):
+            phrase = phrase[:-2] + 'ido'
+            
+            helper_verb = {
+                '1s':'he',
+                '2s':'has',
+                '3s':'ha',
+                '1p':'hemos',
+                '2p':'habéis',
+                '3p':'han'
+            }
+
+            
+
+            if negative:
+                return "no " + helper_verb[subject] + " " + phrase
+            return helper_verb[subject] + " " + phrase
+
+        # elif phrase.endswith('ir'):  # verb.endswith('ir')
+        #     past_participle = phrase[:-2] + 'ido'
+        #     endings ={
+        #         '1s':'o',
+        #         '2s':'es',
+        #         '3s':'e',
+        #         '1p':'imos',
+        #         '2p':'ís',
+        #         '3p':'en'
+        #     }
+
+        else:
+            phrase = "ENDING NOT FOUND"
+            return phrase
+
+        # if negative:
+        #         return "no " + phrase[:-2] + endings[subject]
+        # return phrase[:-2] + endings[subject] 
+
         
-    else:
-        raise ValueError('Invalid tense')
+    

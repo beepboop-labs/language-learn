@@ -3,9 +3,10 @@ import { userToken } from '../user-token';
 import { ref, onMounted, watch } from 'vue'
 
 let activity = ref({
-    "user-id": null,
+    "userid": null,
     "username": null,
-    "spanish": {
+    "language": null,
+    "activity": {
       "unit1": {
         "q1": false ,
         "q2": false ,
@@ -22,30 +23,17 @@ let activity = ref({
         "q3": false 
       }
     },
-    "swahili": {
-      "unit1": {
-        "q1": false ,
-        "q2": false ,
-        "q3": false
-      },
-      "unit2": {
-        "q1": false ,
-        "q2": false,
-        "q3": false 
-      },
-      "unit3": {
-        "q1": false ,
-        "q2": false ,
-        "q3": false 
-      }
-    } 
   })
 let loggedin = ref(userToken.getLoggedIn())
 // This is a built-in lifecycle hook from Vue
 onMounted(() => {
   
    loggedin.value = userToken.getLoggedIn()
-   getActivity()
+   if(loggedin.value){
+    getActivity()
+
+   }
+   
     
   });
 
@@ -53,9 +41,17 @@ onMounted(() => {
   loggedin.value = userToken.getLoggedIn()
 })
 
+function setLanguage(lang){
+  userToken.language = lang
+  console.log(lang)
+  console.log(userToken.language)
+  getActivity()
+
+}
 function getActivity(){
   const options = { 
-      username: userToken.getUsername(),   
+      language: userToken.language,
+      userid: userToken.userId,
     }
 
     // send login data to the API 
@@ -71,12 +67,12 @@ function getActivity(){
           if(!response.ok){
             throw new Error(response.status + " " + json.message);
           }
-          console.log(json.spanish.unit1.q1)
+          
           activity.value = json
           
       })
       .catch(err => {
-        alert('Unable to get activity. ' + err)
+        console.log('Unable to get activity. ' + err)
       })
   }
 
@@ -85,62 +81,76 @@ function getActivity(){
 
 <template>
   <div class="container">
-    <img src="../assets/Images/istockphoto-1268465415-612x612.jpg" class="image" alt="..." v-if="!loggedin">
+    <div class="welcome" v-if="!loggedin">
+      <h1>Welcome to the Language Learning App!</h1>
+      <p>Please login or register to view the course roadmap</p>
     
+      <img src="../assets/Images/istockphoto-1268465415-612x612.jpg" class="image" alt="...">
+    </div>
    <!-- <div id="login-message" v-if="!loggedin">
     <p>Please login to view the roadmap</p>
   </div> -->
   <!-- <div>{{ activity.spanish.unit1.q1 }}</div> -->
   <div id="roadmap" v-if="loggedin">
-    <h1>SPANISH</h1>
+    <h4>Choose a language:</h4>
+    <button type="button" @click="setLanguage('spanish')">Spanish</button>
+    <button type="button" @click="setLanguage('swahili')">Swahili</button>
+    <h1>{{ userToken.language }}</h1>
     <h2>Unit 1</h2>
+    <h4>Present & Imperative Tense</h4>
     <ul> 
       <li>
-        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 1}}">Multiple Choice</router-link>
-        <span v-if="activity.spanish.unit1.q1">  -->Completed!</span>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 1}}">Multiple Choice</router-link>
+        <span v-if="activity.activity.unit1.q1">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: 'spanish', unit: 1}}">Fill in the Blank</router-link>
-        <span v-if="activity.spanish.unit1.q2">  -->Completed!</span>
+        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: userToken.language, unit: 1}}">Fill in the Blank</router-link>
+        <span v-if="activity.activity.unit1.q2">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 1}}">True or False</router-link>
-        <span v-if="activity.spanish.unit1.q3">  -->Completed!</span>
+        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: userToken.language, unit: 1}}">True or False</router-link>
+        <span v-if="activity.activity.unit1.q3">  -->Completed!</span>
       </li>
     </ul>
     <h2>Unit 2</h2>
+    <h4>Past & Future Tense</h4>
     <p></p>
     <ul>
       <li>
-        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 2}}">Multiple Choice</router-link>
-        <span v-if="activity.spanish.unit2.q1">  -->Completed!</span>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 2}}">Multiple Choice</router-link>
+        <span v-if="activity.activity.unit2.q1">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: 'spanish', unit: 2}}">Fill in the Blank</router-link>
-        <span v-if="activity.spanish.unit2.q2">  -->Completed!</span>
+        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: userToken.language, unit: 2}}">Fill in the Blank</router-link>
+        <span v-if="activity.activity.unit2.q2">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 2}}">True or False</router-link>
-        <span v-if="activity.spanish.unit2.q3">  -->Completed!</span>
+        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: userToken.language, unit: 2}}">True or False</router-link>
+        <span v-if="activity.activity.unit2.q3">  -->Completed!</span>
       </li>
       
     </ul>
     <h2>Unit 3</h2>
+    <h4>Past, Future, and Present-Perfect Tense</h4>
     <p></p>
     <ul>
       <li>
-        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: 'spanish', unit: 3}}">Multiple Choice</router-link>
-        <span v-if="activity.spanish.unit3.q1">  -->Completed!</span>
+        <router-link :to="{name: 'MultipleChoiceQuiz', params:{secondaryLanguage: userToken.language, unit: 3}}">Multiple Choice</router-link>
+        <span v-if="activity.activity.unit3.q1">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: 'spanish', unit: 3}}">Fill in the Blank</router-link>
-        <span v-if="activity.spanish.unit3.q2">  -->Completed!</span>
+        <router-link :to="{name: 'BlankQuiz', params:{secondaryLanguage: userToken.language, unit: 3}}">Fill in the Blank</router-link>
+        <span v-if="activity.activity.unit3.q2">  -->Completed!</span>
       </li>
       <li>
-        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: 'spanish', unit: 3}}">True or False</router-link>
-        <span v-if="activity.spanish.unit3.q3">  -->Completed!</span>
+        <router-link :to="{name: 'TrueFalse', params:{secondaryLanguage: userToken.language, unit: 3}}">True or False</router-link>
+        <span v-if="activity.activity.unit3.q3">  -->Completed!</span>
       </li>
     </ul>
+    <br>
+    <br>
+    <br>
+    <br>
   </div>
   </div>
 </template>
@@ -149,7 +159,7 @@ function getActivity(){
 
 
 <style scoped>
-login-message {
+#login-message {
   background-color: #f2f2f2;
   padding: 20px;
   text-align: center;
@@ -158,6 +168,7 @@ login-message {
 
 #roadmap {
   padding: 20px;
+  margin-bottom: 100px;
 }
 
 #roadmap h1 {
@@ -182,17 +193,22 @@ roadmap li {
 }
 
 .container {
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100%;
+  margin-bottom: 100px;
 }
 
+.welcome {
+  text-align: center;
+}
 .image{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  margin: 0 auto;
+  height: 60vh;
+  width: 60vw;
 }
 
 .image img {

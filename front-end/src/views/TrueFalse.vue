@@ -1,5 +1,9 @@
 <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted, computed } from 'vue'
+  import { useRouter, useRoute } from 'vue-router'
+  import { userToken } from '../user-token';
+
+  const router = useRouter();
 
   const props = defineProps({
   secondaryLanguage: {
@@ -22,6 +26,9 @@
   let quizLength = 0
   let selectedAnswer = ref("")
   let message = ref("")
+  let submitDisabled = computed(() => {
+  return selectedAnswer.value == ''
+})
 
 
   function setQuestions() {
@@ -63,6 +70,9 @@
   }
 
   function isCorrectAnswer(){
+    console.log(selectedAnswer.value)
+    console.log(typeof selectedAnswer.value)
+
     let boolString = (selectedAnswer.value === "true");
     console.log(questions)
     console.log(questions[quizIndex.value].match)
@@ -86,7 +96,39 @@
   }
 
   function completeQuiz() {
+    const options = { 
+      language: userToken.language,
+      userid: userToken.userId,
+      unit: parseInt(props.unit),
+      quiz: 3
+      
+    }
+    console.log(props.unit);
+    console.log(typeof props.unit);
+    console.log(options.unit);
+    console.log(typeof options.unit);
+    
+
+    // send login data to the API 
+    fetch("http://127.0.0.1:5000/user/complete-quiz", { 
+      method: 'POST',
+      body: JSON.stringify(options),
+      headers: { 'Content-Type': 'application/json' } 
+    }).then(res => res.json().then(json => ({
+        response: res,
+        json
+      })))
+      .then(({ response, json }) => {
+          if(!response.ok){
+            throw new Error(response.status + " " + json.message);
+          }
+          
+      })
+      .catch(err => {
+        console.log('Unable to get activity. ' + err)
+      })
     message.value = "Congratulations, you finished the quiz!"
+    router.push("/")  
   }
 
   function submitAnswer(){
@@ -107,7 +149,7 @@
 
   function initializeQuiz() {
     //POST request options
-    const options = {"primaryLanguage": "primary", secondaryLanguage: props.secondaryLanguage, "unit": props.unit, "length": 10}
+    const options = {"primaryLanguage": "primary", secondaryLanguage: props.secondaryLanguage, "unit": parseInt(props.unit), "length": 10}
 
     // Fetch the quiz data from the API
     fetch(quizURL, {
@@ -143,7 +185,7 @@
     <div id="true-false-quiz">
       <div class="progress">{{ quizIndex + 1 }}/{{ quizLength }}</div>
       <div class="question">
-        <div>Does the below translation from primary to secondary is True/False?</div>
+        <div>Does the below translation from english to {{props.secondaryLanguage}} is True/False?</div>
         <span class="prompt">{{ primaryWord }}</span>
         <br/>
         <span class="prompt">{{ secondaryWord }}</span>
@@ -154,7 +196,7 @@
         <input type="radio" id="false" name="answers" value="false" v-model="selectedAnswer">
         <label for="false">False</label>
       </div>
-      <button @click="submitAnswer" type="button">Submit</button>
+      <button @click="submitAnswer" :disabled="submitDisabled" type="button">Submit</button>
       <div class="message">{{ message }}</div>
     </div>
   </template>

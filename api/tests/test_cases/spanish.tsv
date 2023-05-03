@@ -1,0 +1,42 @@
+2s+IMP+comer	come
+2p+IMP+comer	comed
+2s+IMP+traer	trae
+2p+IMP+traer	traed
+2s+IMP+beber	bebe
+2p+IMP+beber	bebed
+2s+IMP+ayudar	ayuda
+2p+IMP+ayudar	ayudad
+2s+IMP+responder	responde
+2p+IMP+responder	responded
+2s+IMP+aprender	aprende
+2p+IMP+aprender	aprended
+1s+PRES+comer	como
+NEG+1s+PRES+comer	no como
+2s+PRES+escribir	escribes
+NEG+2s+PRES+escribir	no escribes
+1p+PRES+responder	respondemos
+NEG+1p+PRES+responder	no respondemos
+1s+PAST+comer	comí
+NEG+1s+PAST+comer	no comí
+2s+PAST+escribir	escribiste
+NEG+2s+PAST+escribir	no escribiste
+1p+PAST+responder	respondimos
+NEG+1p+PAST+responder	no respondimos
+1s+PERF+comer	he comido
+NEG+1s+PERF+comer	no he comido
+2s+PERF+escribir	has escrito
+NEG+2s+PERF+escribir	no has escrito
+1p+PERF+responder	hemos respondido
+NEG+1p+PERF+responder	no hemos respondido
+1s+FUT+comer	comeré
+NEG+1s+FUT+comer	no comeré
+2s+FUT+escribir	escribirás
+NEG+2s+FUT+escribir	no escribirás
+1p+FUT+responder	responderemos
+NEG+1p+FUT+responder	no responderemos
+1s+PAST+abrir	abrí
+1s+PAST+cerrar	cerré
+NEG+1s+PERF+empezar	no he empezado
+1s+PERF+empezar	he empezado
+1s+PRES+significar	significo
+NEG+1p+PRES+significar	no significamos
